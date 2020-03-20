@@ -10,7 +10,7 @@ ProductData.init({
     content: {
         type: Sequelize.STRING
     },
-    name: {
+    city: {
         type: Sequelize.STRING
     },
     time: {
@@ -21,14 +21,6 @@ ProductData.init({
         type: Sequelize.STRING,
         allowNull: false
     },
-    emailClient: {
-        type: Sequelize.STRING,
-        validate: {
-            isEmail: true
-        }
-    }
-
-
 }, { sequelize, modelName: 'productData' });
 
 module.exports = ProductData;
