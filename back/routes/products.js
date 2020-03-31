@@ -9,29 +9,26 @@ const Style = require("../models/style");
 
 /* cambiar el nombre de la ruta de nuevo producto a newDataProduct*/
 router.post('/nuevoproducto', function (req, res) {
-  console.log('CREANDO DATA', req.body);
-  
-  // ProductData.create(req.body)
-//     .then(productData => res.send(productData))
-// });
-  
-  ProductData.create(req.body).then(productData => {
-    User.findByPk(req.user.id).then(user => {
-      Product.findByPk(req.body.productId).then(product => {
-        productData.setProduct(product);
-        productData.setUser(user);
-        res.json(productData);
-        console.log("DATA PTODUCT TERMINADO:",productData)
-      });
-    });
-  });
-});
+  console.log('CREANDO DATA', req.body); feature/localStorage
+  ProductData.create(req.body)
+    .then(productData => res.send(productData))});
 
-router.get("/productData/:id", function(req, res) {
+//   ProductData.create(req.body).then(productData => {
+//     User.findByPk(req.user.id).then(user => {
+//       Product.findByPk(req.body.productId).then(product => {
+//         productData.setProduct(product);
+//         productData.setUser(user);
+//         res.json(productData);
+//       });
+//     });
+//   });
+// });
+
+router.get("/productData/:id", function (req, res) {
   ProductData.findByPk(req.params.id).then(data => res.send(data));
 });
 
-router.put("/modifyDataProduct", function(req, res) {
+router.put("/modifyDataProduct", function (req, res) {
   console.log("BODY:", req.body);
   ProductData.update(
     { quantity: req.body.quantity },
@@ -70,7 +67,7 @@ router.post("/getProductFSS", (req, res) => {
   });
 });
 
-router.post("/newProductData", function(req, res) {
+router.post("/newProductData", function (req, res) {
 
   ProductData.create(req.body).then(productData => {
     User.findByPk(req.user.id).then(user => {
@@ -83,33 +80,33 @@ router.post("/newProductData", function(req, res) {
   });
 });
 
-router.post("/newProduct", function(req, res) {
-  
+router.post("/newProduct", function (req, res) {
+  console.log('esto es el body', req.body)
   Product.findOrCreate({
     where: {
-      digital: req.body.digital,
+      // digital: req.body.digital,
       frameId: req.body.frameId,
       sizeId: req.body.sizeId,
       styleId: req.body.styleId
     }
-  }).spread(function(product, created) {
+  }).spread(function (product, created) {
     res.json(product);
   });
 });
 
-router.get("/getProducts", function(req, res) {
-  Product.findAll().then(function(products) {
+router.get("/getProducts", function (req, res) {
+  Product.findAll().then(function (products) {
     res.json(products);
   });
 });
 
-router.get("/styles/:id", function(req, res, next) {
+router.get("/styles/:id", function (req, res, next) {
   Style.findByPk(req.params.id)
     .then(data => res.send(data))
     .catch(() => console.log("el archivo no esta"));
 });
 
-router.post("/getAllfss", function(req, res) {
+router.post("/getAllfss", function (req, res) {
   console.log("entre");
   Frame.findAll().then(frames => {
     console.log("fffffffffffff", frames);
@@ -125,10 +122,11 @@ router.post("/getAllfss", function(req, res) {
   });
 });
 
-router.get("/:id", function(req, res) {
-  Product.findByPk(req.params.id).then(function(product) {
-    res.json(product);
-  });
+router.get("/:id", function (req, res) {
+  Product.findByPk(req.params.id)
+    .then((product) => {
+      res.json(product);
+    });
 });
 
 module.exports = router;

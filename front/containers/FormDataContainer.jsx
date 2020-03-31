@@ -1,14 +1,16 @@
 import React from "react";
 import { connect } from "react-redux";
-import { createDataProduct,dataProduct } from "../actions/productDataActions"
-import {getCart} from "../actions/cartActions"
+import { createDataProduct } from "../actions/productDataActions"
+import { fetchProduct } from '../actions/productsActions'
+
+
 import FormData from '../components/FormData'
 
 const mapDispatchToProps = (dispatch, state) => {
     return {
-        dataProduct: (data) => dispatch(dataProduct(data)),
-            getCart: () => dispatch(getCart()) 
-        }
+
+        createDataProduct: (data) => dispatch(createDataProduct(data)),
+        selectedProducts: (product) => dispatch(fetchProduct(product))
     };
 
 
@@ -34,6 +36,13 @@ class FormDataContainer extends React.Component {
         };
         this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
+    }
+    componentDidMount() {
+        let product = JSON.parse(localStorage.getItem('selectedStyle'))
+        if (product) {
+            this.props.selectedProducts(product)
+        }
+
     }
 
     handleChange(e) {

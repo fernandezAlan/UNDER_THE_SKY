@@ -145,8 +145,7 @@ class ProductsContainer extends React.Component {
 
   handleClick(e) {
     this.props.selectStyle(e)
-    console.log('HoLA ES EL SELECT STYLE',e);
-    
+    localStorage.setItem('selectedStyle', e)
     this.props.history.push('/product')
   }
 
