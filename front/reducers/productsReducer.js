@@ -6,7 +6,8 @@ import {
   SELECT_FRAME,
   SELECT_SIZE,
   ALL_STYLES,
-  DIGITAL
+  DIGITAL,
+  ALL_FRAMES
 } from "../constans";
 
 
@@ -23,11 +24,12 @@ const initialState = {
     imgName: "dummy.png",
     imgData: { type: "Buffer", data: Array(4004) },
     imgPath:
-    '/public/src/img/dummy.png'
+      '/public/src/img/dummy.png'
   },
   selectedSize: {},
   allStyles: [],
-  digital:false
+  allFrames: [],
+  digital: false
 };
 
 export default (state = initialState, action) => {
@@ -40,6 +42,8 @@ export default (state = initialState, action) => {
       return Object.assign({}, state, { Allfss: action.Allfss });
     case ALL_STYLES:
       return Object.assign({}, state, { allStyles: action.allStyles });
+    case ALL_FRAMES:
+      return Object.assign({}, state, { allFrames: action.allFrames });
     case SELECT_STYLE:
       return Object.assign({}, state, { selectedStyle: action.selectedStyle });
     case SELECT_FRAME:
@@ -47,7 +51,7 @@ export default (state = initialState, action) => {
     case SELECT_SIZE:
       return Object.assign({}, state, { selectedSize: action.selectedSize })
     case DIGITAL:
-        return Object.assign({}, state, { digital: action.digital })
+      return Object.assign({}, state, { digital: action.digital })
     default:
       return state;
   }

@@ -38,13 +38,13 @@ export default ({
   };
 
   const getPrice = () => {
-    return 0+selectedFrame.price+selectedSize.price
+    return 0 + selectedFrame.price + selectedSize.price
   };
-  
-  const imgurlPoster = selectedStyle.imgPath.toString().split("/public")[1];
 
-  console.log('PRERETURN SELECTED FRAMEEEEEEEEEE',selectedFrame);
-  
+  const imgurlPoster = selectedStyle.imgPath ? selectedStyle.imgPath.toString().split("/public")[1] : null
+
+  console.log('PRERETURN SELECTED FRAMEEEEEEEEEE', selectedFrame);
+
   return (
     <div style={singleStyle}>
       {/* //AQUI ESTA LA TARJETA */}
@@ -58,25 +58,25 @@ export default ({
             <div id="probuild-contenedor">
 
 
-                <Card.Img
-                  id="probuild-marco"
-                  style={{
-                    borderRadius: "0.2rem",
-                    position: "absolute",
-                    top: 0,
-                    left: 0,
-                    margin: 0,
-                    border: "none",
-                    width: "100%",
-                    height: "100%",
-                    zIndex: 1,
-                    backgroundColor: "rgba(0, 0, 0, 0)",
-                    borderColor:'rgba(0,0,0,0)'
-                  }}
-                  variant="top"
-                  src={selectedFrame.imgPath.slice(7)}
-                />
-              
+              <Card.Img
+                id="probuild-marco"
+                style={{
+                  borderRadius: "0.2rem",
+                  position: "absolute",
+                  top: 0,
+                  left: 0,
+                  margin: 0,
+                  border: "none",
+                  width: "100%",
+                  height: "100%",
+                  zIndex: 1,
+                  backgroundColor: "rgba(0, 0, 0, 0)",
+                  borderColor: 'rgba(0,0,0,0)'
+                }}
+                variant="top"
+                src={selectedFrame.imgPath.slice(7)}
+              />
+
 
               <Card.Img
                 id="probuild-poster"
@@ -84,7 +84,7 @@ export default ({
                   zIndex: 0,
                   position: "relative",
                   borderRadius: "0.2rem",
-                  borderColor:'rgba(0,0,0,0)'
+                  borderColor: 'rgba(0,0,0,0)'
 
                 }}
                 variant="top"
@@ -97,18 +97,18 @@ export default ({
       <h4 className="titulopagina">Estilo: {selectedStyle.name}</h4>
 
 
-      <label style={{ 
+      <label style={{
         color: "#102f51",
-        display:'flex',
-        justifyContent:'center',
-        alignItems:'center',
+        display: 'flex',
+        justifyContent: 'center',
+        alignItems: 'center',
 
-        }}>
-        <p style={{marginBottom:'0'}}>¿quieres el producto en formato digital? </p>
+      }}>
+        <p style={{ marginBottom: '0' }}>¿quieres el producto en formato digital? </p>
 
-     
-          <Switch onChange={handleDigital} checked={digital} />
-        
+
+        <Switch onChange={handleDigital} checked={digital} />
+
       </label>
 
       {/* ver como puede llegar el estilo del cuadro */}
@@ -128,21 +128,21 @@ export default ({
             <span className="sr-only">Loading...</span>
           </Spinner>
         ) : (
-          <ToggleButtonGroup type="radio" name="options" defaultValue={1}>
-            {sizes.map((e) => {
-              return (
-                <ToggleButton
-                  value={e.id}
-                  className="toggle-outline"
-                  onClick={() => handleSize(e)}
-                  name="13x18"
-                >
-                  {e.name}
-                </ToggleButton>
-              );
-            })}
-          </ToggleButtonGroup>
-        )}
+            <ToggleButtonGroup type="radio" name="options" defaultValue={1}>
+              {sizes.map((e) => {
+                return (
+                  <ToggleButton
+                    value={e.id}
+                    className="toggle-outline"
+                    onClick={() => handleSize(e)}
+                    name="13x18"
+                  >
+                    {e.name}
+                  </ToggleButton>
+                );
+              })}
+            </ToggleButtonGroup>
+          )}
       </Container>
       {/* <Container className="d-flex justify-content-center">
         <h4>Color</h4>
@@ -171,26 +171,26 @@ export default ({
               <span className="sr-only">Loading...</span>
             </Spinner>
           ) : (
-            <ToggleButtonGroup type="radio" name="options" defaultValue={toggleDefault} value={toggleDefault}>
-              {frames.map((e) => {
-                return (
-                  <ToggleButton
-                    value={e.id}
-                    className="toggle-outline"
-                    onClick={() => handleFrame(e)}
-                    name="13x18"
-                  >
-                    {e.name}
-                  </ToggleButton>
-                );
-              })}
-            </ToggleButtonGroup>
-          )}
+              <ToggleButtonGroup type="radio" name="options" defaultValue={toggleDefault} value={toggleDefault}>
+                {frames.map((e) => {
+                  return (
+                    <ToggleButton
+                      value={e.id}
+                      className="toggle-outline"
+                      onClick={() => handleFrame(e)}
+                      name="13x18"
+                    >
+                      {e.name}
+                    </ToggleButton>
+                  );
+                })}
+              </ToggleButtonGroup>
+            )}
         </Container>
       </div>
 
 
-     
+
 
       {/* //AQUI ESTA EL PRECIO */}
       {/* //AQUI ESTA EL PRECIO */}
@@ -198,17 +198,17 @@ export default ({
       {/* //AQUI ESTA EL PRECIO */}
       {/* //AQUI ESTA EL PRECIO */}
       <Container >
-      <Container className="d-flex justify-content-center singleproduct-variable">
+        <Container className="d-flex justify-content-center singleproduct-variable">
           <h4>Confirmá tu cuadro</h4>
         </Container>
 
-        <p style={{marginBottom:'0.2rem'}}><strong>Estilo:  </strong>{selectedStyle.name}</p>
-        <p style={{marginBottom:'0.2rem'}}><strong>Tamaño: </strong> {selectedSize.name}</p>
-        <p style={{marginBottom:'0.2rem'}}><strong>Marco:  </strong>{selectedFrame.name}</p>
+        <p style={{ marginBottom: '0.2rem' }}><strong>Estilo:  </strong>{selectedStyle.name}</p>
+        <p style={{ marginBottom: '0.2rem' }}><strong>Tamaño: </strong> {selectedSize.name}</p>
+        <p style={{ marginBottom: '0.2rem' }}><strong>Marco:  </strong>{selectedFrame.name}</p>
 
       </Container>
       <Container className="d-flex justify-content-center singleproduct-subtotal">
-            <p>Subtotal: ${getPrice()}</p> <br />
+        <p>Subtotal: ${getPrice()}</p> <br />
       </Container>
       {/* //BOTON A SIIGUIENTE PASO */}
       {/* //BOTON A SIIGUIENTE PASO */}
