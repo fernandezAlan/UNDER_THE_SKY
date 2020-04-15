@@ -8,8 +8,13 @@ import CheckoutContainer from "./CheckoutContainer"
 
 
 
-class StepWizardContainer extends React.Component{
-    constructor(){
+
+
+
+
+
+class StepWizardContainer extends React.Component {
+    constructor() {
         super()
     }
 
@@ -32,5 +37,6 @@ class StepWizardContainer extends React.Component{
                         
                        
                    
+
 
 export default connect()(StepWizardContainer);

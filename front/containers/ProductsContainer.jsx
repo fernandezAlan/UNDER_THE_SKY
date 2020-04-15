@@ -2,7 +2,7 @@ import React from "react";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 import Products from "../components/Products";
-import { selectStyle } from '../actions/productsActions'
+import { selectStyle, getAllfss } from '../actions/productsActions'
 
 // ACCIONES 
 import {
@@ -23,7 +23,8 @@ const mapStateToProps = (state, ownprops) => {
 const mapDispatchToProps = (dispatch, state) => {
   return {
     allStyles:data => dispatch(allStyles(data)),
-    selectStyle: data=>dispatch(selectStyle(data))
+    selectStyle: data=>dispatch(selectStyle(data)),
+    getAllfss: data=>dispatch(getAllfss)
   };
 };
 
@@ -49,6 +50,7 @@ class ProductsContainer extends React.Component {
     .then(result=>{
       this.props.allStyles(result.data)
     })
+    this.props.getAllfss()
   }
 
 
