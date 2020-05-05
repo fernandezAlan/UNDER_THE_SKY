@@ -10,3 +10,4 @@ front/package-lock.json
 back/package-lock.json
 back/package.json
 .DS_Store
+back/.env.development

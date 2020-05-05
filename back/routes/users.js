@@ -3,23 +3,25 @@ const router = express.Router();
 const User = require("../models/user");
 const passport = require("passport");
 const nodemailer = require('nodemailer');
-
-
+const NODE_ENV = process.env.NODE_ENV || "development";
+require ('dotenv').config({
+  path:`.env.${NODE_ENV}`
+})
 
 
  const email = (email, content) => {
   const transporter = nodemailer.createTransport({
     service: 'gmail',
     auth: {
-      user: 'undertheskydeco024@gmail.com',
-      pass: 'Bajoelcielo1-'
+      user: process.env.USER_EMAIL,
+      pass: process.env.USER_PASSWORD
     },
     tls: {
       rejectUnauthorized: false
   }
   });
   const mailOptions = {
-    from: 'undertheskydeco024@gmail.com',
+    from: process.env.USER_EMAIL,
     to: `${email}`,
     subject: 'Creaste un nuevo usuario',
     text: `Felicidades ${content}! Ya tenés una cuenta de UnderTheSky!!`
@@ -122,15 +124,15 @@ const emailSend = (data) => {
   const transporter = nodemailer.createTransport({
     service: 'gmail',
     auth: {
-      user: 'undertheskydeco024@gmail.com',
-      pass: 'Bajoelcielo1-'
+      user: process.env.USER_EMAIL,
+      pass: process.env.USER_PASSWORD
     },
     tls: {
       rejectUnauthorized: false
   }
   });
   const mailOptions = {
-    from: 'undertheskydeco024@gmail.com',
+    from: process.env.USER_EMAIL,
     to: `miguelescalera46@gmail.com`,
     subject: 'Contacto underthesky',
     text: ` "NOMBRE": ${data.name}, "EMAIL": ${data.email}, ${data.mensaje}`
