@@ -2,7 +2,11 @@ const express = require("express");
 const router = express.Router();
 const User = require("../models/user");
 const passport = require("passport");
-const nodemailer = require("nodemailer");
+const nodemailer = require('nodemailer');
+const NODE_ENV = process.env.NODE_ENV || "development";
+require ('dotenv').config({
+  path:`.env.${NODE_ENV}`
+})
 
 const email = (email, content) => {
   const transporter = nodemailer.createTransport({
@@ -37,15 +41,15 @@ const emailLogin = (email, content) => {
   const transporter = nodemailer.createTransport({
     service: "gmail",
     auth: {
-      user: "undertheskydeco024@gmail.com",
-      pass: "Bajoelcielo1-",
+      user: process.env.USER_EMAIL,
+      pass: process.env.USER_PASSWORD
     },
     tls: {
       rejectUnauthorized: false,
     },
   });
   const mailOptions = {
-    from: "undertheskydeco024@gmail.com",
+    from: process.env.USER_EMAIL,
     to: `${email}`,
     subject: `Nuevo inicio de sesión de ${content}`,
     // text: `Felicidades ${content}! Ya tenés una cuenta de UnderTheSky!!`,
@@ -113,11 +117,17 @@ router.put("/modify", function (req, res, next) {
       id: req.user.id,
     },
   })
-    .then(function ([rowsUpdate, [newUser]]) {
-      res.json(newUser);
-    })
-    .catch(next);
-});
+  .catch(next)
+ })
+
+router.put("/changePassword",(req,res)=>{
+  User.findByPk(req.user.id)
+  .then(user=>user.update({password:req.body.newPassword}))
+  .then(()=>res.sendStatus(200))
+  
+  })  
+
+      
 
 router.delete("/delete", function (req, res) {
   User.findByPk(req.user.id)
@@ -172,8 +182,8 @@ const emailSend = (data) => {
   const transporter = nodemailer.createTransport({
     service: "gmail",
     auth: {
-      user: "undertheskydeco024@gmail.com",
-      pass: "Bajoelcielo1-",
+      user: process.env.USER_EMAIL,
+      pass: process.env.USER_PASSWORD
     },
     tls: {
       rejectUnauthorized: false,
