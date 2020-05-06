@@ -32,7 +32,6 @@ const mapDispatchToProps = (dispatch) => {
     fetchNewProduct: (data) => dispatch(fetchNewProduct(data)),
     Allfss: (data) => dispatch(Allfss(data)),
     getAllfss: () => dispatch(getAllfss()),
-
   };
 };
 
@@ -50,130 +49,126 @@ class SingleProductContainer extends React.Component {
         imgType: "image/png",
         imgName: "dummy.png",
         imgData: { type: "Buffer", data: Array(4004) },
-        imgPath:
-          '/public/src/img/dummy.png'
+        imgPath: "/public/src/img/dummy.png",
+      },
+      selectedSize: {
+        id: 0,
+        name: "dummy",
+        price: null,
+      },
+    };
+    this.handleFrame = this.handleFrame.bind(this);
+    this.handleSize = this.handleSize.bind(this);
+    this.handleClick = this.handleClick.bind(this);
+    this.handleDigital = this.handleDigital.bind(this);
+  }
+
+  componentDidMount() {
+    this.props.getAllfss().then((result) => {
+      this.props.Allfss(result.data);
+      // this.props.selectFrame(result.data.frames[0])
+      // this.props.selectSize(result.data.sizes[0])
+      localStorage.setItem(
+        "selectedFrame",
+        JSON.stringify(result.data.frames[0])
+      );
+      localStorage.setItem(
+        "selectedSize",
+        JSON.stringify(result.data.sizes[0])
+      );
+    });
+  }
+
+  handleFrame(frame) {
+    this.props.selectFrame(frame);
+    this.setState({
+      selectedFrame: frame,
+    });
+    localStorage.setItem("selectedFrame", JSON.stringify(frame));
+  }
+  handleSize(size) {
+    this.props.selectSize(size);
+    localStorage.setItem("selectedSize", JSON.stringify(size));
+  }
+  handleDigital(frame, size) {
+    this.props.selectSize(size);
+    this.props.selectFrame(frame);
+    // this.setState({
+    //   selectedFrame: frame,
+    // });
+
+    this.setState({
+      digital: !this.state.digital,
+      toggleDefault: this.state.digital ? 0 : this.props.selectedFrame.id,
+      selectedFrame: {
+        id: 0,
+        name: "frameless",
+        price: 0,
+        imgType: "image/png",
+        imgName: "dummy.png",
+        imgData: { type: "Buffer", data: Array(4004) },
+        imgPath: "/public/src/img/dummy.png",
       },
       selectedSize: {
         id: 0,
         name: "dummy",
         price: 0,
-      }
-    };
-    this.handleFrame = this.handleFrame.bind(this);
-    this.handleSize = this.handleSize.bind(this);
-    this.handleClick = this.handleClick.bind(this)
-    this.handleDigital = this.handleDigital.bind(this);
+      },
+    });
   }
 
-
-
-      
-    componentDidMount() {
-        
-        this.props.getAllfss()
-        .then(result=>{
-            this.props.Allfss(result.data)
-            // this.props.selectFrame(result.data.frames[0])
-            this.props.selectSize(result.data.sizes[0])
-            localStorage.setItem('selectedFrame',JSON.stringify(result.data.frames[0]))
-            localStorage.setItem('selectedSize',JSON.stringify(result.data.sizes[0]))
-        })
-
-        
+  handleClick(e) {
+    e.preventDefault();
+    localStorage.setItem(
+      "selectedStyle",
+      JSON.stringify(this.props.selectedStyle)
+    );
+    localStorage.setItem(
+      "selectedSize",
+      JSON.stringify(this.props.selectedSize)
+    );
+    this.props.selectedDigital(this.state.digital);
+    if (this.state.digital) {
+      this.props.selectFrame({});
+    } else {
+      this.props.selectFrame(JSON.parse(localStorage.getItem("selectedFrame")));
     }
-           
-        
-       
-    
-    handleFrame(frame) {
-            this.props.selectFrame(frame)
-            this.setState({
-              selectedFrame: frame,
-            });
-            localStorage.setItem('selectedFrame',JSON.stringify(frame))
-      }
-    handleSize(size) {
-            this.props.selectSize(size)
-            localStorage.setItem('selectedSize',JSON.stringify(size))
-        }
-        handleDigital(frame,size) {
-          this.props.selectSize(size)
-          this.props.selectFrame(frame)
-          // this.setState({
-          //   selectedFrame: frame,
-          // });
+    this.props.nextStep();
+  }
 
-          this.setState({ 
-              digital: !this.state.digital,
-              toggleDefault:this.state.digital?0:this.props.selectedFrame.id,
-              selectedFrame: {
-                id: 0,
-                name: "frameless",
-                price: 0,
-                imgType: "image/png",
-                imgName: "dummy.png",
-                imgData: { type: "Buffer", data: Array(4004) },
-                imgPath:
-                '/public/src/img/dummy.png'
-              }
-           });
-        }
-         
-    handleClick(e) {
-            e.preventDefault();
-            localStorage.setItem('selectedStyle',JSON.stringify(this.props.selectedStyle))
-            localStorage.setItem('selectedSize',JSON.stringify(this.props.selectedSize))
-            this.props.selectedDigital(this.state.digital)
-            if(this.state.digital){
-                this.props.selectFrame({})
-            }
-            else{
-                this.props.selectFrame(JSON.parse(localStorage.getItem("selectedFrame")))
-            }
-               this.props.nextStep()
-        }
-                
-       scrollUp(){
-        window.scrollTo({
-          top: 0,
-          behavior: "smooth"
-        });
-       }   
+  scrollUp() {
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth",
+    });
+  }
 
-        render() {
-          this.scrollUp()
-          return (
-            <div>
-              <h3 className="titulopagina">Personalizalo</h3>
-              <SingleProduct
-                handleColor={this.handleColor}
-                handleSize={this.handleSize}
-                handleFrame={this.handleFrame}
-                sizes={this.props.sizes}
-                frames={this.props.frames}
-                styles={this.props.styles}
-                handleClick={this.handleClick}
-                digital={this.state.digital}
-                handleDigital={this.handleDigital}
-                selectedStyle={this.props.selectedStyle}
-                selectedSize={this.props.selectedSize}
+  render() {
+    this.scrollUp();
+    return (
+      <div>
+        <h3 className="titulopagina">Personalizalo</h3>
+        <SingleProduct
+          handleColor={this.handleColor}
+          handleSize={this.handleSize}
+          handleFrame={this.handleFrame}
+          sizes={this.props.sizes}
+          frames={this.props.frames}
+          styles={this.props.styles}
+          handleClick={this.handleClick}
+          digital={this.state.digital}
+          handleDigital={this.handleDigital}
+          selectedStyle={this.props.selectedStyle}
+          selectedSize={this.props.selectedSize}
+          selectedFrame={this.state.selectedFrame}
+          toggleDefault={this.state.toggleDefault}
+        />
+      </div>
+    );
+  }
+}
 
-                selectedFrame={this.state.selectedFrame}
-                toggleDefault={this.state.toggleDefault}
-              />
-            </div>
-          );
-        }
-    }
-    
-    
-
-
-
-
-
-
-
-
-
-export default connect(mapStateToProps, mapDispatchToProps)(SingleProductContainer);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(SingleProductContainer);
