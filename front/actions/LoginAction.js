@@ -41,3 +41,8 @@ export const userLogin = user => {
     return user.data;
     }
   );
+
+  export const changeUserPassword =(newPassword)=>{
+    return axios.put("/api/users/changePassword",{newPassword:newPassword})
+   }
+  
