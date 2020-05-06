@@ -37,10 +37,16 @@ User.init(
       allowNull: false,
       validate: {
         notEmpty: true
-      }
+      },
+      get() {
+        return () => this.getDataValue('password')
+    }
     },
     salt: {
-      type: Sequelize.STRING
+      type: Sequelize.STRING,
+      get() {
+        return() => this.getDataValue('salt')
+      }
     }
   },
   {
@@ -49,6 +55,29 @@ User.init(
   }
 );
 
+
+User.generateSalt = function() {
+  return crypto.randomBytes(20).toString('hex')
+}
+User.encryptPassword = function(plainText, salt) {
+  return crypto
+      .createHash('RSA-SHA256')
+      .update(plainText)
+      .update(salt)
+      .digest('hex')
+}
+
+const setSaltAndPassword = user => {
+  console.log("entre")
+  if (user.changed('password')) {
+      user.salt = User.generateSalt()
+      user.password = User.encryptPassword(user.password(), user.salt())
+  }
+}
+User.beforeCreate(setSaltAndPassword)
+User.beforeUpdate(setSaltAndPassword)
+
+/*
 User.addHook("beforeCreate", user => {
   user.salt = crypto.randomBytes(20).toString("hex");
   user.password = user.hashPassword(user.password);
@@ -61,9 +90,13 @@ User.prototype.hashPassword = function(password) {
     .update(password)
     .digest("hex");
 };
+*/
+
 
 User.prototype.validPassword = function(password) {
-  return this.password === this.hashPassword(password);
+  return this.password() === User.encryptPassword(password, this.salt());
 };
+
+ 
 
 module.exports = User;

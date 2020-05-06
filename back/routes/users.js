@@ -100,7 +100,13 @@ router.put("/modify", function (req, res,next) {
   .catch(next)
  })
 
+router.put("/changePassword",(req,res)=>{
+  User.findByPk(req.user.id)
+  .then(user=>user.update({password:req.body.newPassword}))
+  .then(()=>res.sendStatus(200))
   
+  })  
+
       
 
 router.delete("/delete", function (req, res) {

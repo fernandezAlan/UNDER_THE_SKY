@@ -1,7 +1,7 @@
 import React from "react"
 import EditUser from "../components/EditUser"
 import {connect} from "react-redux"
-import {modifyUser} from "../actions/LoginAction"
+import {modifyUser,changeUserPassword} from "../actions/LoginAction"
 
 
 const mapStateToProps = state => {
@@ -25,15 +25,21 @@ class EditUserContainer extends React.Component{
             inputName:false,
             inputLastName:false,
             inputEmail:false,
+            alert:false,
+            alertPassword:false,
+            alertPasswordChanged:false,
             inputPassword:false,
             firstName:this.props.user.firstName,
             lastName:this.props.user.lastName,
             email:this.props.user.email,
-            alert:false,
             newPassword:"",
             repeatPassword:"",
-            alertPassword:false
         }
+       
+       
+            
+            
+           
         this.changeName=this.changeName.bind(this)
         this.changeLastName=this.changeLastName.bind(this)
         this.changeEmail=this.changeEmail.bind(this)
@@ -41,6 +47,7 @@ class EditUserContainer extends React.Component{
         this.changeUser= this.changeUser.bind(this)
         this.changeSubmit=this.changeSubmit.bind(this)
         this.submitNewPassword=this.submitNewPassword.bind(this)
+        
         }
             
 
@@ -68,12 +75,15 @@ componentDidUpdate(prevProps, prevState) {
     }   
 
     changeName(){
-        //this.forceUpdate()
+       
         this.setState({
             inputName:!this.state.inputName,
             inputLastName:false,
             inputEmail:false
         })
+       
+        
+    
         
     }
     changeLastName(){
@@ -83,6 +93,10 @@ componentDidUpdate(prevProps, prevState) {
             inputName:false
         })
     }
+        
+              
+           
+
     changeEmail(){
         this.setState({
             inputEmail:!this.state.inputEmail,
@@ -90,11 +104,17 @@ componentDidUpdate(prevProps, prevState) {
             inputLastName:false
         })
     }
+          
+          
+
     changePassword(){
         this.setState({
             inputPassword:!this.state.inputPassword
         })
     }
+           
+         
+
 
     changeSubmit(){
 
@@ -102,28 +122,60 @@ componentDidUpdate(prevProps, prevState) {
         let lastNameState=this.state.lastName
         let emailState=this.state.email
         if(nameState===""||lastNameState===""||emailState===""){
-            this.setState({alert:true})
+            this.setState({
+                alert:true
+            })
         }
         else{
-            this.setState({alert:false})
-            console.log("this.state:",this.state)
-            this.props.modifyUser(this.state)
+            this.setState({
+               
+                    alert:false
+                })
+                this.props.modifyUser(this.state)
+            }
+               
         }
-    }
+            
+             
+        
+
+
+    
+            
     submitNewPassword(e){
     
         e.preventDefault()
         if(this.state.newPassword===this.state.repeatPassword){
             this.setState({alertPassword:false})
-            this.props.modifyUser({password:this.state.newPassword})
+            changeUserPassword(this.state.newPassword)
+            .then(res=>{
+                if(res.data==="OK"){
+                    this.setState({
+                        alertPasswordChanged:true,
+                        newPassword:"",
+                        repeatPassword:""
+                    })
+                }
+            })
         }
         else{
-            this.setState({alertPassword:true})
+            console.log("entre al else")
+            this.setState({
+                alertPassword:true
+            })
         }
-        console.log("alert:",this.state)
     }
+               
+             
+                       
+                    
+
+           
+
+        
    
     render(){
+        console.log("state:",this.state)
       
         return(
             <div>

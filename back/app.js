@@ -57,6 +57,7 @@ passport.use(
             return done(null, false, { message: "Incorrect username." });
           }
           if (!user.validPassword(password)) {
+            console.log("validPasword",!user.validPassword(password));
             return done(null, false, { message: "Incorrect password." });
           }
           return done(null, user);
