@@ -3,6 +3,8 @@ const router = express.Router();
 
 const fileUpload = require("express-fileupload");
 const fs = require("fs");
+const nodemailer = require("nodemailer");
+
 
 const multer = require("multer");
 
@@ -233,9 +235,43 @@ router.get("/getOrders", function (req, res) {
   });
 });
 
+const changeStatusMail = (email, content) => {
+
+  const transporter = nodemailer.createTransport({
+    service: "gmail",
+    auth: {
+      user: "undertheskydeco024@gmail.com",
+      pass: "Bajoelcielo1-",
+    },
+    tls: {
+      rejectUnauthorized: false,
+    },
+  });
+  const mailOptions = {
+    from: "undertheskydeco024@gmail.com",
+    to: `${email}`,
+    subject: `Lamentamos verte partir ${content}`,
+    html: { path: "./mailTemplates/userDelete.html" },
+  };
+  console.log(email)
+  console.log(content)
+  console.log("sending email", mailOptions);
+  transporter.sendMail(mailOptions, function (error, info) {
+    console.log("senMail returned!");
+    if (error) {
+      console.log("ERROR!!!!!!", error);
+    } else {
+      console.log("Email sent: " + info.response);
+    }
+  });
+};
+
+
 router.put("/changeStatus", function (req, res) {
   console.log("BODY.", req.body);
   Order.findByPk(req.body.orderId).then(function (order) {
+    console.log(order);
+    
     order.update({ status: req.body.status }).then(function (newOrder) {
       res.json(newOrder);
     });
@@ -270,14 +306,50 @@ router.post("/addAdmin", function (req, res) {
   });
 });
 
+
+const userDelete = (email, content) => {
+
+  const transporter = nodemailer.createTransport({
+    service: "gmail",
+    auth: {
+      user: "undertheskydeco024@gmail.com",
+      pass: "Bajoelcielo1-",
+    },
+    tls: {
+      rejectUnauthorized: false,
+    },
+  });
+  const mailOptions = {
+    from: "undertheskydeco024@gmail.com",
+    to: `${email}`,
+    subject: `Lamentamos verte partir ${content}`,
+    html: { path: "./mailTemplates/userDelete.html" },
+  };
+  console.log(email)
+  console.log(content)
+  console.log("sending email", mailOptions);
+  transporter.sendMail(mailOptions, function (error, info) {
+    console.log("senMail returned!");
+    if (error) {
+      console.log("ERROR!!!!!!", error);
+    } else {
+      console.log("Email sent: " + info.response);
+    }
+  });
+};
+
+
 router.delete("/deleteUser/:id", function (req, res) {
   const id = req.params.id;
   User.findByPk(id)
     .then((user) => {
+      userDelete(user.email, user.firstName)
       user.destroy();
     })
     .then(res.sendStatus(204));
 });
+
+
 
 ///////////PRODUCTS////////////////////////
 router.get("/getAllDataProducts", function (req, res) {
