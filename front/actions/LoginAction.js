@@ -28,7 +28,9 @@ export const userLogin = user => {
   axios.delete("/api/users/delete")
   .then(()=> {
     dispatch(addLogin({}))
-    return user.data;
+    localStorage.removeItem("email")
+    localStorage.removeItem("pass")
+   
     }
   );
 
@@ -45,4 +47,5 @@ export const userLogin = user => {
   export const changeUserPassword =(newPassword)=>{
     return axios.put("/api/users/changePassword",{newPassword:newPassword})
    }
+  
   

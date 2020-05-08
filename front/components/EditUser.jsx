@@ -1,10 +1,10 @@
-import React from "react";
+import React, { useState } from 'react';
 import Col from 'react-bootstrap/Col'
 import Row from 'react-bootstrap/Row'
 import Container from 'react-bootstrap/Container'
 import Button from 'react-bootstrap/Button'
 import Alert from 'react-bootstrap/Alert'
-
+import Modal from 'react-bootstrap/Modal'
 
 export default ({
     changeName,
@@ -15,8 +15,12 @@ export default ({
     changePassword,
     changeUser,
     changeSubmit,
-    submitNewPassword
+    submitNewPassword,
+    handleDeleteUser,
+    showDeleteUser
 })=>{
+    
+
     
    
     const styleContainer={
@@ -29,29 +33,25 @@ export default ({
     padding:"5%"
     }
     
-    
-
-    
-    
-    
-
-//--------------------------------------------//
     const buttonStyle={
         border: "solid 0px",
         backgroundColor: "white",
         color: "blue",
         marginBottom: "30px"
     }
-  
+    
 
+    
     const display = (string)=>{
+        console.log("display:",state[string])
         const inputPassword={
             display:"none",
             border:"solid 1px gray",
             borderRadius:"3px",
             width:"50%",
             marginLeft:"25%",
-            padding:"10px"
+            padding:"10px",
+            marginBottom:"15%"
         }
 
         if(string==="inputPassword"){
@@ -72,6 +72,12 @@ export default ({
         }
         
 }
+    
+    
+
+
+  
+
     
 
     
@@ -134,7 +140,7 @@ export default ({
                 <Button variant="dark" onClick={changeSubmit}>guardar cambios</Button>    
             </div>
             <div style={{textAlign:"center"}}>
-                <button onClick={changePassword} style={buttonStyle}>cambiar contraseña</button>
+                <button onClick={changePassword} style={buttonStyle}>cambiar contraseña</button> <br/>
                 <form style={display("inputPassword")} >
                     <strong>escribe la nueva contraseña</strong><br/>
                     <input type="password" 
@@ -164,10 +170,19 @@ export default ({
                     </div>
                     <button  style={{marginBottom:"15px"}} onClick={submitNewPassword}>cambiar contraseña</button>
                 </form>
+      <Button variant="outline-danger" onClick={showDeleteUser}>eliminar mi cuenta</Button>
+            <div style={display("deleteUser")}>
+                <span>¿estas seguro que quieres eliminar tu cuenta?</span><br/>
+                <button onClick={handleDeleteUser}>si</button>
+                <button onClick={showDeleteUser}>no</button>
+            </div>
+     
             </div> 
         </div>
     )
 }
+                   
+               
 
 
                    

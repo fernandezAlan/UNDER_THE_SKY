@@ -93,7 +93,7 @@ router.post("/login", function (req, res, next) {
         console.log("login err: ", loginErr);
         return next(loginErr);
       }
-      console.log("req.user", req.user);
+
       emailLogin(req.user.email, req.user.firstName);
 
       return res.send(req.user);
