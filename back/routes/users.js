@@ -75,6 +75,8 @@ router.get("/:id", function (req, res) {
 router.post("/register", function (req, res) {
   User.create(req.body)
     .then(function (user) {
+      console.log(user);
+      
       res.json(user);
     })
     .then(() => email(req.body.email, req.body.firstName));
