@@ -137,7 +137,8 @@ export default ({
             </Popover.Content>
           </Popover>
         );
-
+        console.log(dataProduct);
+        
         return (
           <Card
             className="tarjetaproducto"
@@ -185,10 +186,6 @@ export default ({
               </Card.Text>
               <Card.Text>
                 <strong>Direccion: </strong> {e.address}
-              </Card.Text>
-              <Card.Text>
-                <strong>Email:</strong>
-                {dataProduct[0]?dataProduct[0].emailClient:null}
               </Card.Text>
               <Card.Text>
                 <strong>Total: </strong>${total}

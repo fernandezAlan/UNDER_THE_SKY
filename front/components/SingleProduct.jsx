@@ -64,7 +64,13 @@ export default ({
     let finalPrice = selectedFrame.price + selectedSize.price;
     if (!finalPrice) {
       return (
-        <Spinner style={{marginBlockEnd:'7px'}} animation="grow" size='sm' role="status" variant="secondary">
+        <Spinner
+          style={{ marginBlockEnd: "7px" }}
+          animation="grow"
+          size="sm"
+          role="status"
+          variant="secondary"
+        >
           <span className="sr-only">Loading...</span>
         </Spinner>
       );
@@ -90,26 +96,24 @@ export default ({
         <Card className="singleproduct-card ">
           <Card.Body style={{ padding: "0px" }}>
             <div id="probuild-contenedor">
-              
-                <Card.Img
-                  id="probuild-marco"
-                  style={{
-                    borderRadius: "0.2rem",
-                    position: "absolute",
-                    top: 0,
-                    left: 0,
-                    margin: 0,
-                    border: "none",
-                    width: "100%",
-                    height: "100%",
-                    zIndex: 1,
-                    backgroundColor: "rgba(0, 0, 0, 0)",
-                    borderColor: "rgba(0,0,0,0)",
-                  }}
-                  variant="top"
-                  src={selectedFrame.imgPath.slice(7)}
-                />
-              
+              <Card.Img
+                id="probuild-marco"
+                style={{
+                  borderRadius: "0.2rem",
+                  position: "absolute",
+                  top: 0,
+                  left: 0,
+                  margin: 0,
+                  border: "none",
+                  width: "100%",
+                  height: "100%",
+                  zIndex: 1,
+                  backgroundColor: "rgba(0, 0, 0, 0)",
+                  borderColor: "rgba(0,0,0,0)",
+                }}
+                variant="top"
+                src={selectedFrame.imgPath.slice(7)}
+              />
 
               {!imgurlPoster ? (
                 <Spinner animation="border" role="status" variant="secondary">
@@ -182,8 +186,6 @@ export default ({
           <Switch onChange={handleDigital} checked={digital} />
         </label>
 
-        {/* ver como puede llegar el estilo del cuadro */}
-
         {/* //AQUI ES EL PRIMER RENDER VARIABLE (TAMANO) */}
         {/* //AQUI ES EL PRIMER RENDER VARIABLE (TAMANO) */}
         {/* //AQUI ES EL PRIMER RENDER VARIABLE (TAMANO) */}
@@ -200,7 +202,7 @@ export default ({
                 <span className="sr-only">Loading...</span>
               </Spinner>
             ) : (
-              <ToggleButtonGroup type="radio" name="options" defaultValue={1}>
+              <ToggleButtonGroup type="radio" name="options">
                 {sizes.map((e) => {
                   if (e.type === "digital") {
                     return (
@@ -230,7 +232,7 @@ export default ({
                 <span className="sr-only">Loading...</span>
               </Spinner>
             ) : (
-              <ToggleButtonGroup type="radio" name="options" defaultValue={1}>
+              <ToggleButtonGroup type="radio" name="options">
                 {sizes.map((e) => {
                   if (e.type === "impreso") {
                     return (
@@ -344,14 +346,31 @@ export default ({
           style={{ paddingBlockStart: "15px" }}
           className="d-flex justify-content-center "
         >
-          <Button
-            className="boton-solido "
-            type="submit"
-            size="lg"
-            onClick={handleClick}
-          >
-            <FontAwesomeIcon icon={faArrowRight} />
-          </Button>{" "}
+          {typeof getPrice() !== "number" ||
+          selectedSize.price === 0 ||
+          (!digital && selectedFrame.price === 0) ? (
+            <span>
+              <Button
+                className="boton-solido "
+                type="submit"
+                size="lg"
+                onClick={handleClick}
+                disabled
+              >
+                <FontAwesomeIcon icon={faArrowRight} />
+              </Button>
+              <small class="text-muted form-text">Seleccioná tamaño y formato</small>
+            </span>
+          ) : (
+            <Button
+              className="boton-solido "
+              type="submit"
+              size="lg"
+              onClick={handleClick}
+            >
+              <FontAwesomeIcon icon={faArrowRight} />
+            </Button>
+          )}{" "}
         </Container>
       </Container>
     </div>
