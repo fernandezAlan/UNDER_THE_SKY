@@ -41,15 +41,15 @@ const emailLogin = (email, content) => {
   const transporter = nodemailer.createTransport({
     service: "gmail",
     auth: {
-      user: process.env.USER_EMAIL,
-      pass: process.env.USER_PASSWORD
+      user: "undertheskydeco024@gmail.com",
+      pass: "Bajoelcielo1-",
     },
     tls: {
       rejectUnauthorized: false,
     },
   });
   const mailOptions = {
-    from: process.env.USER_EMAIL,
+    from: "undertheskydeco024@gmail.com",
     to: `${email}`,
     subject: `Nuevo inicio de sesión de ${content}`,
     // text: `Felicidades ${content}! Ya tenés una cuenta de UnderTheSky!!`,
@@ -75,6 +75,8 @@ router.get("/:id", function (req, res) {
 router.post("/register", function (req, res) {
   User.create(req.body)
     .then(function (user) {
+      console.log(user);
+      
       res.json(user);
     })
     .then(() => email(req.body.email, req.body.firstName));
@@ -161,7 +163,7 @@ const userDelete = (email, content) => {
   const mailOptions = {
     from: "undertheskydeco024@gmail.com",
     to: `${email}`,
-    subject: `Lamentmos verte partir ${content.name}`,
+    subject: `Lamentamos verte partir ${content.name}`,
     // text: `Felicidades ${content}! Ya tenés una cuenta de UnderTheSky!!`,
     html: { path: "./mailTemplates/userDelete.html" },
   };

@@ -19,6 +19,7 @@ const mapDispatchToProps = (dispatch, state) => {
 
 const mapStateToProps = (state, ownprops) => {
   return {
+    user: state.user,
     userEmail: state.user.user.email,
     nameUser: state.user.user.firstName,
     lastNameUser: state.user.user.lastName,
@@ -49,7 +50,9 @@ class CheckoutContainer extends React.Component {
   }
 
   handleEncuentro(id) {
+    
     this.props.addNewOrder({
+      user: this.props.user ,
       order: { deliveryPoint: true },
       productDataId: this.props.idsForOrders,
       PuntoDeEncuentro: id,
