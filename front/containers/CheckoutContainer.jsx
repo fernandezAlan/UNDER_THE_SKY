@@ -1,7 +1,6 @@
 import React from "react";
 import Checkout from "../components/Checkout";
 import { connect } from "react-redux";
-import { orderInProcess, PuntoDeEncuentro } from "../actions/orderActions";
 import { addNewOrder, getPuntoDeEncuentro } from "../actions/orderActions";
 import { withRouter } from "react-router-dom";
 import { modifyData } from "../actions/productDataActions";
