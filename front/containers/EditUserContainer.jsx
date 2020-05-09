@@ -1,7 +1,7 @@
 import React from "react"
 import EditUser from "../components/EditUser"
 import {connect} from "react-redux"
-import {modifyUser,changeUserPassword} from "../actions/LoginAction"
+import {modifyUser,changeUserPassword,deleteUser} from "../actions/LoginAction"
 
 
 const mapStateToProps = state => {
@@ -13,7 +13,8 @@ const mapStateToProps = state => {
     
     const mapDispatchToProps = function(dispatch){  
       return {
-        modifyUser:(data)=>dispatch(modifyUser(data))
+        modifyUser:(data)=>dispatch(modifyUser(data)),
+        deleteUser:()=>dispatch(deleteUser())
       }
      };
 
@@ -34,6 +35,7 @@ class EditUserContainer extends React.Component{
             email:this.props.user.email,
             newPassword:"",
             repeatPassword:"",
+            deleteUser: false
         }
        
        
@@ -47,6 +49,8 @@ class EditUserContainer extends React.Component{
         this.changeUser= this.changeUser.bind(this)
         this.changeSubmit=this.changeSubmit.bind(this)
         this.submitNewPassword=this.submitNewPassword.bind(this)
+        this.handleDeleteUser=this.handleDeleteUser.bind(this)
+        this.showDeleteUser=this.showDeleteUser.bind(this)
         
         }
             
@@ -109,8 +113,10 @@ componentDidUpdate(prevProps, prevState) {
 
     changePassword(){
         this.setState({
-            inputPassword:!this.state.inputPassword
+            inputPassword:!this.state.inputPassword,
+         
         })
+        console.log("changePassword:",this.state.inputPassword)
     }
            
          
@@ -128,13 +134,23 @@ componentDidUpdate(prevProps, prevState) {
         }
         else{
             this.setState({
-               
-                    alert:false
-                })
-                this.props.modifyUser(this.state)
-            }
-               
+            alert:false,
+            inputName:false,
+            inputLastName:false,
+            inputEmail:false,
+            alertPassword:false,
+            alertPasswordChanged:false,
+            inputPassword:false,
+            deleteUser: false
+            })
+           
+            this.props.modifyUser(this.state)
         }
+    }
+            
+            
+               
+               
             
              
         
@@ -143,7 +159,6 @@ componentDidUpdate(prevProps, prevState) {
     
             
     submitNewPassword(e){
-    
         e.preventDefault()
         if(this.state.newPassword===this.state.repeatPassword){
             this.setState({alertPassword:false})
@@ -159,14 +174,46 @@ componentDidUpdate(prevProps, prevState) {
             })
         }
         else{
-            console.log("entre al else")
             this.setState({
                 alertPassword:true
             })
         }
     }
-               
+    
+   handleDeleteUser(){
+      this.props.deleteUser()
+      this.props.history.push("/")
+   } 
+
+   showDeleteUser(){
+       this.setState({
+        deleteUser:!this.state.deleteUser
+       })
+      
+   }            
              
+   render(){
+       return(
+           <div>
+               <EditUser
+               changeName={this.changeName}
+               changeLastName={this.changeLastName}
+               changeEmail={this.changeEmail}
+               state={this.state}
+               user={this.props.user}
+               changePassword={this.changePassword}
+               changeUser={this.changeUser}
+               changeSubmit={this.changeSubmit}
+               submitNewPassword={this.submitNewPassword}
+               handleDeleteUser={this.handleDeleteUser}
+               showDeleteUser={this.showDeleteUser}
+               />
+           </div>
+       )
+   }
+}
+export default connect (mapStateToProps,mapDispatchToProps)(EditUserContainer)
+   
                        
                     
 
@@ -174,24 +221,4 @@ componentDidUpdate(prevProps, prevState) {
 
         
    
-    render(){
-        console.log("state:",this.state)
       
-        return(
-            <div>
-                <EditUser
-                changeName={this.changeName}
-                changeLastName={this.changeLastName}
-                changeEmail={this.changeEmail}
-                state={this.state}
-                user={this.props.user}
-                changePassword={this.changePassword}
-                changeUser={this.changeUser}
-                changeSubmit={this.changeSubmit}
-                submitNewPassword={this.submitNewPassword}
-                />
-            </div>
-        )
-    }
-}
-export default connect (mapStateToProps,mapDispatchToProps)(EditUserContainer)

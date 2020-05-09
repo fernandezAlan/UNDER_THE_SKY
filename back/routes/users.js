@@ -67,7 +67,7 @@ router.post("/login", function (req, res, next) {
         console.log("login err: ", loginErr)
         return next(loginErr);
       }
-console.log("req.user",req.user)
+console.log("USUARIO LOGUEADO",req.user)
       return res.send(req.user);
     });
   })(req, res, next);
