@@ -1,6 +1,5 @@
 import React from "react";
 import { connect } from "react-redux";
-import { Link } from "react-router-dom";
 import Products from "../components/Products";
 import { selectStyle, getAllfss } from '../actions/productsActions'
 
@@ -14,16 +13,16 @@ import { runInThisContext } from "vm";
 
 const mapStateToProps = (state, ownprops) => {
   return {
-    styles:state.products.allStyles,
-    selectedStyle:state.products.selectedStyle
+    styles: state.products.allStyles,
+    selectedStyle: state.products.selectedStyle
   };
 };
 
 const mapDispatchToProps = (dispatch, state) => {
   return {
-    allStyles:data => dispatch(allStyles(data)),
-    selectStyle: data=>dispatch(selectStyle(data)),
-    getAllfss: data=>dispatch(getAllfss)
+    allStyles: data => dispatch(allStyles(data)),
+    selectStyle: data => dispatch(selectStyle(data)),
+    getAllfss: data => dispatch(getAllfss)
   };
 };
 
@@ -35,23 +34,23 @@ class ProductsContainer extends React.Component {
 
   componentDidMount() {
     getAllStyles()
-    .then(result=>{
-      this.props.allStyles(result.data)
-    })
+      .then(result => {
+        this.props.allStyles(result.data)
+      })
     this.props.getAllfss()
   }
 
 
 
   handleClick(selectedStyle) {
-    console.log("style",selectedStyle)
+    console.log("style", selectedStyle)
     this.props.selectStyle(selectedStyle)
-    localStorage.setItem("selectedStyle",JSON.stringify(selectedStyle))
+    localStorage.setItem("selectedStyle", JSON.stringify(selectedStyle))
 
- 
-   this.props.history.push('/product')
-   
-    
+
+    this.props.history.push('/product')
+
+
   }
 
   render() {

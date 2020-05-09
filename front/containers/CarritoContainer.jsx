@@ -8,9 +8,6 @@ import Container from 'react-bootstrap/Container'
 import CheckoutCart from "../components/CheckoutCart"
 import { withRouter } from "react-router-dom"
 import { allStyles, getAllStyles, getAllFrames, allFrames } from "../actions/productsActions"
-import Row from 'react-bootstrap/Row'
-import Col from 'react-bootstrap/Col'
-
 
 
 const mapStateToProps = (state, ownProps) => {
@@ -39,16 +36,16 @@ const mapDispatchToProps = (dispatch) => {
 class NavbarContainer extends React.Component {
   constructor(props) {
     super();
-    this.state={
-      refresh:true
+    this.state = {
+      refresh: true
     }
 
     this.handleDelete = this.handleDelete.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleQuantity = this.handleQuantity.bind(this);
     this.handleEditData = this.handleEditData.bind(this)
-    this.BackStep= this.BackStep.bind(this)
-    this.BackStep=this.BackStep.bind(this)
+    this.BackStep = this.BackStep.bind(this)
+    this.BackStep = this.BackStep.bind(this)
   }
 
   componentDidMount() {
@@ -68,7 +65,7 @@ class NavbarContainer extends React.Component {
       let dataProduct = JSON.parse(localStorage.getItem("dataWithoutUser"))
       this.props.cartWithoutUser(dataProduct)
     }
-      
+
 
 
 
@@ -92,7 +89,7 @@ class NavbarContainer extends React.Component {
       this.props.cartWithoutUser(dataProduct)
     }
     this.setState({
-      refresh:!this.state.refresh
+      refresh: !this.state.refresh
     })
   }
 

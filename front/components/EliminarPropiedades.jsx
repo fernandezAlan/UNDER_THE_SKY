@@ -4,7 +4,6 @@ import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import Button from "react-bootstrap/Button";
 import Container from "react-bootstrap/Container";
-import Collapse from "react-bootstrap/Collapse";
 import { Link } from "react-router-dom";
 import { Tab, Tabs } from "react-bootstrap";
 export default ({
@@ -39,7 +38,7 @@ export default ({
               marginBlockStart: "2rem",
               display: "flex",
               justifyContent: "center",
-              paddingBlockEnd:'3rem'
+              paddingBlockEnd: '3rem'
             }}
           >
             {frames ? (
@@ -86,8 +85,8 @@ export default ({
                 );
               })
             ) : (
-              <span></span>
-            )}
+                <span></span>
+              )}
           </Container>
         </div>
       </Tab>
@@ -100,7 +99,7 @@ export default ({
               justifyContent: "center",
               textAlign: "center",
               alignItems: "center",
-              paddingBlockEnd:'3rem'
+              paddingBlockEnd: '3rem'
             }}
           >
             {sizes ? (
@@ -129,75 +128,75 @@ export default ({
                 );
               })
             ) : (
-              <span></span>
-            )}
+                <span></span>
+              )}
           </Container>
         </div>
       </Tab>
       <Tab eventKey="estilos" title="Estilos">
         <div id="Estilos">
-        <Container
+          <Container
             style={{
               marginBlockStart: "2rem",
               display: "flex",
               justifyContent: "center",
               textAlign: "center",
               alignItems: "center",
-              flexWrap:'wrap',
-              paddingBlockEnd:'3rem'
+              flexWrap: 'wrap',
+              paddingBlockEnd: '3rem'
             }}
           >
-           
-              {styles.map((style) => {
-                return (
-                 
-                    <Card style={{margin:'1.5rem', maxWidth:'10rem'}} className="tarjetaproducto">
-                      <Card.Img
-                        variant="top"
-                        src={style.imgPath.toString().split("/public")[1]}
-                      />
-                      <Card.Body>
-                        
-                            <Card.Text className="titulotarjeta">
-                              {style.name.charAt(0).toUpperCase() +
-                                style.name.slice(1)}
-                            </Card.Text>
-                            <Card.Text className="titulotarjeta">
-                              {style.color.charAt(0).toUpperCase() +
-                                style.color.slice(1)}
-                              {style.name === "zodiac"
-                                ? " - " +
-                                  style.signo.charAt(0).toUpperCase() +
-                                  style.signo.slice(1)
-                                : null}
-                            </Card.Text>
-                        
 
-                   
-                            <span>
-                              <Button
-                                className="boton-outline"
-                                style={botonSelecc}
-                                onClick={() => handleDeleteStyle(style.id)}
-                              >
-                                Eliminar
+            {styles.map((style) => {
+              return (
+
+                <Card style={{ margin: '1.5rem', maxWidth: '10rem' }} className="tarjetaproducto">
+                  <Card.Img
+                    variant="top"
+                    src={style.imgPath.toString().split("/public")[1]}
+                  />
+                  <Card.Body>
+
+                    <Card.Text className="titulotarjeta">
+                      {style.name.charAt(0).toUpperCase() +
+                        style.name.slice(1)}
+                    </Card.Text>
+                    <Card.Text className="titulotarjeta">
+                      {style.color.charAt(0).toUpperCase() +
+                        style.color.slice(1)}
+                      {style.name === "zodiac"
+                        ? " - " +
+                        style.signo.charAt(0).toUpperCase() +
+                        style.signo.slice(1)
+                        : null}
+                    </Card.Text>
+
+
+
+                    <span>
+                      <Button
+                        className="boton-outline"
+                        style={botonSelecc}
+                        onClick={() => handleDeleteStyle(style.id)}
+                      >
+                        Eliminar
                               </Button>
-                              <Link to={`/eladmin/editStyle/${style.id}`}>
-                                <Button
-                                  className="boton-outline"
-                                  style={botonSelecc}
-                                >
-                                  Editar
+                      <Link to={`/eladmin/editStyle/${style.id}`}>
+                        <Button
+                          className="boton-outline"
+                          style={botonSelecc}
+                        >
+                          Editar
                                 </Button>
-                              </Link>
-                            </span>
-                       
-                      </Card.Body>
-                    </Card>
-                  
-                );
-              })}
-            
+                      </Link>
+                    </span>
+
+                  </Card.Body>
+                </Card>
+
+              );
+            })}
+
           </Container>
         </div>
       </Tab>

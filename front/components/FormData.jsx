@@ -3,8 +3,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
-import Card from "react-bootstrap/Card";
-import Row from "react-bootstrap/Row";
+
 import Container from "react-bootstrap/Container";
 import moment from "moment"
 import Calendar from "react-calendar";
@@ -63,7 +62,7 @@ export default ({
   };
 
   console.log(state);
-  
+
   return (
     <Form onSubmit={handleSubmit} style={formStyle}>
       <Container style={colStyle}>
@@ -133,15 +132,15 @@ export default ({
             Nunca compartiremos tu Email
           </Form.Text>
         </Form.Group>
-        <Container style={botonesWzrd }>
+        <Container style={botonesWzrd}>
           {enableButton ? (
             <Button
               onClick={PreviousStep}
               className="boton-solido"
               type="submit"
             >
-              
-<FontAwesomeIcon icon={faArrowLeft} />
+
+              <FontAwesomeIcon icon={faArrowLeft} />
             </Button>
           ) : null}
 

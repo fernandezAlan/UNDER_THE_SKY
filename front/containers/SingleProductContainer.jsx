@@ -6,7 +6,6 @@ import {
   getAllfss,
   fetchNewProduct,
   selectStyle,
-  SelectedProducts,
   selectFrame,
   selectSize,
   Allfss,
@@ -117,6 +116,7 @@ class SingleProductContainer extends React.Component {
     });
   }
 
+
   handleClick(e) {
     e.preventDefault();
     localStorage.setItem(
@@ -135,6 +135,7 @@ class SingleProductContainer extends React.Component {
     }
     this.props.nextStep();
   }
+
 
   scrollUp() {
     window.scrollTo({

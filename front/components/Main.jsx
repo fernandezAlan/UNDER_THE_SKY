@@ -5,7 +5,6 @@ import { connect } from "react-redux";
 import NavbarContainer from "../containers/NavbarContainer";
 import FooterContainer from "../containers/FooterContainer";
 import ProductsContainer from "../containers/ProductsContainer";
-import SingleProductContainer from "../containers/SingleProductContainer";
 import LoginContainer from "../containers/LoginContainer";
 import RegisterContainer from "../containers/RegisterContainer";
 import FormDataContainer from "../containers/FormDataContainer";
@@ -14,7 +13,6 @@ import AdminUsersContainer from "../containers/AdminUsersContainer";
 import CarritoContainer from "../containers/CarritoContainer";
 import CheckoutContainer from "../containers/CheckoutContainer";
 import EditDataContainer from "../containers/EditDataContainer"
-import Img from "react-bootstrap/Image";
 import "../../back/public/global.css";
 import AdminPoroductsContainer from '../containers/AdminProductsContainer'
 import Admin from '../components/Admin'
@@ -23,7 +21,7 @@ import PuntoDeEncuentroContainer from "../containers/PuntoDeEncuentroContainer";
 import StepWizardContainer from "../containers/StepWizardContainer"
 import comprasUsuarioContainer from "../containers/comprasUsuarioContainer"
 import EditUserContainer from "../containers/EditUserContainer"
-import GraciasContainer from "../containers/GraciasContainer";
+import Gracias from "../components/Gracias";
 import EditSizeContainer from "../containers/EditSizeContainer";
 import EditFrameContainer from '../containers/EditFrameContainer'
 import EditStyleContainer from '../containers/EditStyleContainer'
@@ -80,7 +78,7 @@ class Main extends React.Component {
           <Route path="/checkoutDigital" exact component={checkoutDigitalContainer} />
           <Route path="/usersOrders" exact component={comprasUsuarioContainer} />
           <Route path="/admin/getOrders" exact component={AdminOrdenesContainer} />
-          <Route path="/gracias" exact component={GraciasContainer} />
+          <Route path="/gracias" exact component={Gracias} />
           <Route
             path="/admin/getOrders"
             exact

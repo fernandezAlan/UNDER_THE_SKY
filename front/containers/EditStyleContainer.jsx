@@ -1,14 +1,6 @@
 import React from "react";
-import Login from "../components/Login";
 import { connect } from "react-redux";
-import { userLogin, addLogin } from "../actions/LoginAction"
-import { encrypt } from "../actions/RegisterAction"
-import { Tabs, Tab, FormFile } from 'react-bootstrap'
-import AddFrame from "../components/AddFrame";
-import AddSize from '../components/AddSize'
-import AddStyle from '../components/AddStyle'
 import { fetchStyle } from '../actions/productsActions'
-import EliminarPropiedades from "../components/EliminarPropiedades";
 import EditStyle from '../components/EditStyle'
 import { editStyle } from '../actions/adminActions'
 

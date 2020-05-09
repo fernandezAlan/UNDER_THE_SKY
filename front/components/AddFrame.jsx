@@ -1,11 +1,8 @@
 import React from "react";
-import { Link } from "react-router-dom";
 import {
   Form,
   Button,
   Card,
-  Container,
-  FormControl,
   FormFile,
 
   //   FormFileInput,
@@ -14,13 +11,10 @@ import {
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
-  faFileImport,
   faPaperPlane,
   faSearch,
 } from "@fortawesome/free-solid-svg-icons";
 <FontAwesomeIcon icon={faPaperPlane} />;
-
-import Alert from "react-bootstrap/Alert";
 
 export default ({ handleChange, handleSubmit, handleFile }) => {
   const formStyle = {
@@ -30,8 +24,8 @@ export default ({ handleChange, handleSubmit, handleFile }) => {
     padding: "3rem",
     borderRadius: "0px",
     boxShadow: "8px 8px 15px -10px rgba(0,0,0,0.39)",
-    justifyContent:'center',
-    alignItems:'center',
+    justifyContent: 'center',
+    alignItems: 'center',
   };
 
   const divFormStyle = {
@@ -41,15 +35,15 @@ export default ({ handleChange, handleSubmit, handleFile }) => {
     marginBlockStart: "0.5rem",
   };
 
-  const cardStyleAdd ={
-    justifyContent:'center',
-    alignItems:'center',
+  const cardStyleAdd = {
+    justifyContent: 'center',
+    alignItems: 'center',
   }
   return (
     <div style={divFormStyle}>
-      <Card           style={formStyle}
-          className="login-container"
-          >
+      <Card style={formStyle}
+        className="login-container"
+      >
         <h3
           className="d-flex justify-content-center"
           style={{ marginBlockEnd: "1rem" }}
