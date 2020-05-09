@@ -19,6 +19,53 @@
 .headroom{
   z-index: 2!important;
 }
+
+/* NODEMAILER */
+
+.mail-container{
+  width: 30rem;
+  height: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin: auto;
+  text-align: center;
+  margin-block-start: 5rem;
+  margin-block-end: 5rem;
+  background-size: 100%;
+  background-image: url('https://i.imgur.com/mpm9Q26.png');
+  background-attachment: fixed;
+  background-position: center;
+  border-color:  #a39e93 ;
+  border-style: solid;
+  border-width: 1px;
+  border-radius: 20px;
+  
+}
+
+.mail-logo{
+  width: 18rem;
+  height: auto;
+
+}
+
+.mail-texto{
+  margin-left: 3rem;
+  margin-right: 3rem;
+  color: #868279;
+  font-weight: 200;
+}
+
+.mail-texto-muted{
+  margin-left: 3rem;
+  margin-right: 3rem;
+  color: #9e9a8f;
+  font-weight: 200;
+  font-size: 0.7rem;
+}
+
+
 /* TITULO Y FORMS PARA TODAS LAS SECCIONES */
 .titulopagina {
   margin-block-start: 2rem;

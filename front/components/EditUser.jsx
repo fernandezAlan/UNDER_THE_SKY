@@ -1,10 +1,10 @@
-import React from "react";
+import React, { useState } from 'react';
 import Col from 'react-bootstrap/Col'
 import Row from 'react-bootstrap/Row'
 import Container from 'react-bootstrap/Container'
 import Button from 'react-bootstrap/Button'
 import Alert from 'react-bootstrap/Alert'
-
+import Modal from 'react-bootstrap/Modal'
 
 export default ({
     changeName,
@@ -15,8 +15,12 @@ export default ({
     changePassword,
     changeUser,
     changeSubmit,
-    submitNewPassword
+    submitNewPassword,
+    handleDeleteUser,
+    showDeleteUser
 })=>{
+    
+
     
    
     const styleContainer={
@@ -29,92 +33,52 @@ export default ({
     padding:"5%"
     }
     
-
-    const inputName={
-        display:"none"
-    }
-    const inputLastName={
-        display:"none"
-    }
-    const inputEmail={
-        display:"none"
-    }
-    const inputPassword={
-        display:"none",
-        border:"solid 1px gray",
-        borderRadius:"3px",
-        width:"50%",
-        marginLeft:"25%",
-        padding:"10px"
-    }
-    const styleAlert={
-        display:"none"
-       
-    }
-    const styleAlertPass={
-        display:"none"
-    }
-
-//--------------------------------------------//
     const buttonStyle={
         border: "solid 0px",
         backgroundColor: "white",
         color: "blue",
         marginBottom: "30px"
     }
-
-
-
-    if(state.inputName){
-        inputName.display="block"
-    }
-    else{
-        inputName.display="none"
-    }
-    //---------------------------------------
-    if(state.inputLastName){
-        inputLastName.display="block"
-    }
-    else{
-        inputLastName.display="none"
-    }
-    //---------------------------------------
-    if(state.inputEmail){
-        inputEmail.display="block"
-    }
-    else{
-        inputEmail.display="none"
-    }
-    //---------------------------------------
-   
-
-    if(state.inputPassword){
-        inputPassword.display="block"
-    }
-    else{
-        inputPassword.display="none"
-    }
-    //---------------------------------------
-
-
-    if(state.alert){
-        styleAlert.display="block"
-    }
-    else{
-        styleAlert.display="none"
-    }
-    //---------------------------------------
     
 
-    if(state.alertPassword){
-        styleAlertPass.display="block"
-    }
-    else{
-        styleAlertPass.display="none"
-    }
-    //---------------------------------------
+    
+    const display = (string)=>{
+        console.log("display:",state[string])
+        const inputPassword={
+            display:"none",
+            border:"solid 1px gray",
+            borderRadius:"3px",
+            width:"50%",
+            marginLeft:"25%",
+            padding:"10px",
+            marginBottom:"15%"
+        }
+
+        if(string==="inputPassword"){
+            if(state.inputPassword){
+                inputPassword.display="block"
+            }
+            return inputPassword
+        }
+        if(state[string]){
+            return{
+                display:"block"
+            }
+        }
+        else{
+            return {
+                display:"none"
+            }
+        }
+        
+}
+    
+    
 
 
+  
+
+    
 
     
     return(
@@ -125,7 +89,7 @@ export default ({
                         <div style={{marginBottom:"30px"}}>
                             <strong>nombre: </strong><span>{user.firstName}</span>
                             <div>
-                                <form style={inputName}>
+                                <form style={display("inputName")}>
                                     <input type="text" value={state.firstName}
                                      name="firstName" 
                                      onChange={changeUser} 
@@ -137,7 +101,7 @@ export default ({
                         <div style={{marginBottom:"30px"}}>
                             <strong>apellido: </strong><span>{user.lastName}</span>
                             <div>
-                                <form style={inputLastName}>
+                                <form style={display("inputLastName")}>
                                     <input type="text"value={state.lastName}
                                         name="lastName"
                                         onChange={changeUser}
@@ -150,7 +114,7 @@ export default ({
                         <div style={{marginBottom:"30px"}}>
                             <strong>email: </strong> <span>{user.email}</span>
                             <div>
-                                <form style={inputEmail}>
+                                <form style={display("inputEmail")}>
                                     <input type="text"value={state.email}
                                      name="email" 
                                      onChange={changeUser}
@@ -167,7 +131,7 @@ export default ({
                     </Col>
              </Row>
           </Container>
-          <div style={styleAlert}>
+          <div style={display("alert")}>
               <Alert variant="danger">
                   ¡no puedes dejar un campo vacio!
               </Alert>
@@ -176,31 +140,49 @@ export default ({
                 <Button variant="dark" onClick={changeSubmit}>guardar cambios</Button>    
             </div>
             <div style={{textAlign:"center"}}>
-                <button onClick={changePassword} style={buttonStyle}>cambiar contraseña</button>
-                <form style={inputPassword} >
+                <button onClick={changePassword} style={buttonStyle}>cambiar contraseña</button> <br/>
+                <form style={display("inputPassword")} >
                     <strong>escribe la nueva contraseña</strong><br/>
                     <input type="password" 
                     style={{marginBottom:"15px"}} 
                     onChange={changeUser}
                     name="newPassword"
+                    value={state.newPassword}
                     /><br/>
                     <strong>repite la nueva contraseña</strong><br/>
                     <input type="password"
                     style={{marginBottom:"15px"}}
                     onChange={changeUser}
                     name="repeatPassword"
+                    value={state.repeatPassword}
                     />
-                    <div style={styleAlertPass}>
+                    <div style={display("alertPassword")}>
                         <Alert variant="danger">
                             ¡las contraseñas no coinciden!
                         </Alert>
+                        
+                    </div>
+                    <div style={display("alertPasswordChanged")}>
+                        <Alert variant="success">
+                            ¡tu contraseña fue cambiada!
+                        </Alert>
+                        
                     </div>
                     <button  style={{marginBottom:"15px"}} onClick={submitNewPassword}>cambiar contraseña</button>
                 </form>
+      <Button variant="outline-danger" onClick={showDeleteUser}>eliminar mi cuenta</Button>
+            <div style={display("deleteUser")}>
+                <span>¿estas seguro que quieres eliminar tu cuenta?</span><br/>
+                <button onClick={handleDeleteUser}>si</button>
+                <button onClick={showDeleteUser}>no</button>
+            </div>
+     
             </div> 
         </div>
     )
 }
+                   
+               
 
 
                    

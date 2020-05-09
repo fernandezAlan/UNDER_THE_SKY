@@ -31,7 +31,6 @@ const mapDispatchToProps = (dispatch) => {
     fetchNewProduct: (data) => dispatch(fetchNewProduct(data)),
     Allfss: (data) => dispatch(Allfss(data)),
     getAllfss: () => dispatch(getAllfss()),
-
   };
 };
 
@@ -49,55 +48,50 @@ class SingleProductContainer extends React.Component {
         imgType: "image/png",
         imgName: "dummy.png",
         imgData: { type: "Buffer", data: Array(4004) },
-        imgPath:
-          '/public/src/img/dummy.png'
+        imgPath: "/public/src/img/dummy.png",
       },
       selectedSize: {
         id: 0,
         name: "dummy",
-        price: 0,
-      }
+        price: null,
+      },
     };
     this.handleFrame = this.handleFrame.bind(this);
     this.handleSize = this.handleSize.bind(this);
-    this.handleClick = this.handleClick.bind(this)
+    this.handleClick = this.handleClick.bind(this);
     this.handleDigital = this.handleDigital.bind(this);
   }
 
-
-
-
   componentDidMount() {
-
-    this.props.getAllfss()
-      .then(result => {
-        this.props.Allfss(result.data)
-        // this.props.selectFrame(result.data.frames[0])
-        this.props.selectSize(result.data.sizes[0])
-        localStorage.setItem('selectedFrame', JSON.stringify(result.data.frames[0]))
-        localStorage.setItem('selectedSize', JSON.stringify(result.data.sizes[0]))
-      })
-
-
+    this.props.getAllfss().then((result) => {
+      this.props.Allfss(result.data);
+      // this.props.selectFrame(result.data.frames[0])
+      // this.props.selectSize(result.data.sizes[0])
+      localStorage.setItem(
+        "selectedFrame",
+        JSON.stringify(result.data.frames[0])
+      );
+      localStorage.setItem(
+        "selectedSize",
+        JSON.stringify(result.data.sizes[0])
+      );
+    });
   }
 
-
-
-
   handleFrame(frame) {
-    this.props.selectFrame(frame)
+    this.props.selectFrame(frame);
     this.setState({
       selectedFrame: frame,
     });
-    localStorage.setItem('selectedFrame', JSON.stringify(frame))
+    localStorage.setItem("selectedFrame", JSON.stringify(frame));
   }
   handleSize(size) {
-    this.props.selectSize(size)
-    localStorage.setItem('selectedSize', JSON.stringify(size))
+    this.props.selectSize(size);
+    localStorage.setItem("selectedSize", JSON.stringify(size));
   }
   handleDigital(frame, size) {
-    this.props.selectSize(size)
-    this.props.selectFrame(frame)
+    this.props.selectSize(size);
+    this.props.selectFrame(frame);
     // this.setState({
     //   selectedFrame: frame,
     // });
@@ -112,35 +106,46 @@ class SingleProductContainer extends React.Component {
         imgType: "image/png",
         imgName: "dummy.png",
         imgData: { type: "Buffer", data: Array(4004) },
-        imgPath:
-          '/public/src/img/dummy.png'
-      }
+        imgPath: "/public/src/img/dummy.png",
+      },
+      selectedSize: {
+        id: 0,
+        name: "dummy",
+        price: 0,
+      },
     });
   }
 
+
   handleClick(e) {
     e.preventDefault();
-    localStorage.setItem('selectedStyle', JSON.stringify(this.props.selectedStyle))
-    localStorage.setItem('selectedSize', JSON.stringify(this.props.selectedSize))
-    this.props.selectedDigital(this.state.digital)
+    localStorage.setItem(
+      "selectedStyle",
+      JSON.stringify(this.props.selectedStyle)
+    );
+    localStorage.setItem(
+      "selectedSize",
+      JSON.stringify(this.props.selectedSize)
+    );
+    this.props.selectedDigital(this.state.digital);
     if (this.state.digital) {
-      this.props.selectFrame({})
+      this.props.selectFrame({});
+    } else {
+      this.props.selectFrame(JSON.parse(localStorage.getItem("selectedFrame")));
     }
-    else {
-      this.props.selectFrame(JSON.parse(localStorage.getItem("selectedFrame")))
-    }
-    this.props.nextStep()
+    this.props.nextStep();
   }
+
 
   scrollUp() {
     window.scrollTo({
       top: 0,
-      behavior: "smooth"
+      behavior: "smooth",
     });
   }
 
   render() {
-    this.scrollUp()
+    this.scrollUp();
     return (
       <div>
         <h3 className="titulopagina">Personalizalo</h3>
@@ -156,7 +161,6 @@ class SingleProductContainer extends React.Component {
           handleDigital={this.handleDigital}
           selectedStyle={this.props.selectedStyle}
           selectedSize={this.props.selectedSize}
-
           selectedFrame={this.state.selectedFrame}
           toggleDefault={this.state.toggleDefault}
         />
@@ -165,14 +169,7 @@ class SingleProductContainer extends React.Component {
   }
 }
 
-
-
-
-
-
-
-
-
-
-
-export default connect(mapStateToProps, mapDispatchToProps)(SingleProductContainer);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(SingleProductContainer);
