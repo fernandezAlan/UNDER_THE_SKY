@@ -8,8 +8,7 @@ import Container from 'react-bootstrap/Container'
 import CheckoutCart from "../components/CheckoutCart"
 import { withRouter } from "react-router-dom"
 import { allStyles, getAllStyles, getAllFrames, allFrames } from "../actions/productsActions"
-import Row from 'react-bootstrap/Row'
-import Col from 'react-bootstrap/Col'
+
 
 
 
@@ -79,7 +78,7 @@ class NavbarContainer extends React.Component {
 
 
   handleDelete(id) {
-    this.props.deleteProductData(id);
+   
     if (!this.props.userEmail) {
       let dataProduct = JSON.parse(localStorage.getItem("dataWithoutUser"))
 
@@ -90,6 +89,9 @@ class NavbarContainer extends React.Component {
       })
       localStorage.setItem("dataWithoutUser", JSON.stringify(dataProduct))
       this.props.cartWithoutUser(dataProduct)
+    }
+    else{
+      this.props.deleteProductData(id);
     }
     this.setState({
       refresh:!this.state.refresh

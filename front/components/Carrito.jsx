@@ -43,7 +43,7 @@ export default ({
     justifyContent: "space-between",
   };
 
-  console.log("dataProduct", dataProduct);
+  console.log("%c STYLE:","color: blue; border: 1px solid blue",Styles);
 
   return (
     <Container>
@@ -62,7 +62,7 @@ export default ({
           ? selectedFrame[0].imgPath.slice(7)
           : null;
         console.log("selectedFrame", selectedFrame);
-        console.log("selectedStyle:", selectedStyle);
+        console.log("%c selectedStyle:","color: red; border: 1px solid red",selectedStyle);
         quantity = e.quantity;
 
         return (
@@ -156,27 +156,39 @@ export default ({
                     className="carrito-info-row"
                     style={{ textAlign: "initial" }}
                   >
-                    {selectedStyle[0].name === "zodiac" ||
+                    
+                    {selectedStyle[0]?
+                    selectedStyle[0].name === "zodiac" ||
                     selectedStyle[0].name === "Zodiac"
                       ? "Tipografia:"
-                      : null}
-                    {selectedStyle[0].name === "zodiac" ||
+                      : null
+                      
+                      :null}
+
+                    {selectedStyle[0]?
+                    selectedStyle[0].name === "zodiac" ||
                     selectedStyle[0].name === "Zodiac"
                       ? selectedStyle[0].tipografia
-                      : null}
+                      : null
+                      
+                      :null}
                   </Row>
                   <Row
                     className="carrito-info-row"
                     style={{ textAlign: "initial" }}
                   >
-                    {selectedStyle[0].name === "zodiac" ||
+                    {selectedStyle[0]?
+                    (selectedStyle[0].name === "zodiac" ||
                     selectedStyle[0].name === "Zodiac"
                       ? "Signo:"
-                      : null}
-                    {selectedStyle[0].name === "zodiac" ||
+                      : null)
+                      :null}
+                    {selectedStyle[0]?
+                   ( selectedStyle[0].name === "zodiac" ||
                     selectedStyle[0].name === "Zodiac"
                       ? selectedStyle[0].signo
-                      : null}
+                      : null)
+                      :null}
                   </Row>
 
                   {/* BOTON DETALLE */}
