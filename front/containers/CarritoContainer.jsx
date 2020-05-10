@@ -12,6 +12,8 @@ import { allStyles, getAllStyles, getAllFrames, allFrames } from "../actions/pro
 
 
 
+
+
 const mapStateToProps = (state, ownProps) => {
   return {
     dataProduct: state.cart.dataProducts,
@@ -39,17 +41,19 @@ const mapDispatchToProps = (dispatch) => {
 class CarritoContainer extends React.Component {
   constructor(props) {
     super();
+
     this.state={
       refresh:true,
       totalPrice:0
+
     }
 
     this.handleDelete = this.handleDelete.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleQuantity = this.handleQuantity.bind(this);
     this.handleEditData = this.handleEditData.bind(this)
-    this.BackStep= this.BackStep.bind(this)
-    this.BackStep=this.BackStep.bind(this)
+    this.BackStep = this.BackStep.bind(this)
+    this.BackStep = this.BackStep.bind(this)
   }
 
   componentDidMount() {
@@ -87,12 +91,16 @@ class CarritoContainer extends React.Component {
       }
       this.props.cartWithoutUser(dataProduct)
     }
+
   }
       
    
 
    
      
+
+
+
 
 
 
@@ -115,7 +123,7 @@ class CarritoContainer extends React.Component {
       this.props.cartWithoutUser(dataProduct)
     }
     this.setState({
-      refresh:!this.state.refresh
+      refresh: !this.state.refresh
     })
   }
 

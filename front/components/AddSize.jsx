@@ -1,10 +1,8 @@
 import React from "react";
-import { Link } from "react-router-dom";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 import Card from "react-bootstrap/Card";
-import Container from "react-bootstrap/Container";
-import Alert from "react-bootstrap/Alert";
+
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPaperPlane } from "@fortawesome/free-solid-svg-icons";
@@ -68,10 +66,10 @@ export default ({ handleChange, handleSizeSubmit }) => {
             style={{ marginBlockStart: "0.5rem", marginBlockEnd: "1rem" }}
             onClick={handleSizeSubmit}
           >
-           <FontAwesomeIcon icon={faPaperPlane} />
+            <FontAwesomeIcon icon={faPaperPlane} />
           </Button>
         </Form>
-        
+
       </Card>
     </div>
   );
