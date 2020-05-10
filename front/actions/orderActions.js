@@ -8,7 +8,8 @@ import {
   ID_FOR_ORDERS, 
   PUNTO_ENCUENTRO,
   USER_ORDERS,
-  PUNTOS_DE_ENC
+  PUNTOS_DE_ENC,
+  TOTAL_PRICE
 } from "../constans"
 
 
@@ -35,6 +36,10 @@ export const userOrders=userOrders=>({
   userOrders
 })
 
+export const totalPrice = totalprice=>({
+  type:TOTAL_PRICE,
+  totalprice
+})
 
 export const addNewOrder = (dataOrder) => dispatch =>
   axios.post("/api/orders/addOrder", dataOrder)

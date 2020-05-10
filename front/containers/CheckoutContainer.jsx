@@ -24,6 +24,7 @@ const mapStateToProps = (state, ownprops) => {
     lastNameUser: state.user.user.lastName,
     PuntoDeEncuentro: state.orders.PuntoDeEncuentro,
     idsForOrders: state.orders.idsForOrders,
+    totalPrice:state.orders.totalPrice
   };
 };
 
@@ -38,6 +39,7 @@ class CheckoutContainer extends React.Component {
       postCode: "",
       productDataId: "",
       deliveryPoint: false,
+      price:0
     };
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -46,6 +48,9 @@ class CheckoutContainer extends React.Component {
 
   componentDidMount() {
     this.props.getPuntoDeEncuentro();
+    this.setState({
+      totalPrice:this.props.totalPrice
+    })
   }
 
   handleEncuentro(id) {

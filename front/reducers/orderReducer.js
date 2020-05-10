@@ -1,7 +1,7 @@
 
 
 
-import {ORDER,ORDER_IN_PROCESS,ID_FOR_ORDERS, PUNTO_ENCUENTRO,USER_ORDERS} from "../constans"
+import {ORDER,ORDER_IN_PROCESS,ID_FOR_ORDERS, PUNTO_ENCUENTRO,USER_ORDERS,TOTAL_PRICE} from "../constans"
 import { PuntoDeEncuentro } from "../actions/orderActions";
 
 
@@ -11,7 +11,8 @@ const initialState = {
     orderInProcess:{},
     idsForOrders:[],
     userOrders:{},
-    PuntoDeEncuentro:[]
+    PuntoDeEncuentro:[],
+    totalPrice:0
    }
 
 
@@ -32,7 +33,8 @@ const initialState = {
 
       case PUNTO_ENCUENTRO: 
          return Object.assign({}, state, { PuntoDeEncuentro: action.PuntoDeEncuentro });   
-
+      case TOTAL_PRICE: 
+         return Object.assign({}, state, { totalPrice: action.totalprice });   
          default: 
             return state;
        }
