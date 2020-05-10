@@ -1,9 +1,6 @@
 import React from "react";
-import Login from "../components/Login";
 import { connect } from "react-redux";
-import { userLogin, addLogin } from "../actions/LoginAction"
-import { encrypt } from "../actions/RegisterAction"
-import { Tabs, Tab, FormFile } from 'react-bootstrap'
+import { Tabs, Tab } from 'react-bootstrap'
 import AddFrame from "../components/AddFrame";
 import AddSize from '../components/AddSize'
 import AddStyle from '../components/AddStyle'
@@ -34,7 +31,7 @@ class AdminProductsContainer extends React.Component {
         this.state = {
             size: "",
             sizePrice: 0,
-            sizeType:'',
+            sizeType: '',
             frame: "",
             framePrice: 0,
             frameImg: null,
@@ -109,7 +106,7 @@ class AdminProductsContainer extends React.Component {
         newSize({
             name: this.state.size,
             price: this.state.sizePrice,
-            type:this.state.sizeType
+            type: this.state.sizeType
         })
         this.props.history.push("/eladmin");
 

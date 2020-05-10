@@ -1,16 +1,9 @@
 import React from "react";
-import { Link } from "react-router-dom";
 import {
     Form,
     Button,
     Card,
-    Container,
-    FormControl,
     FormFile,
-    Alert,
-
-    //   FormFileInput,
-    //   FormFileLabel
 } from "react-bootstrap";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -73,7 +66,7 @@ export default ({
                     className="d-flex justify-content-center"
                     style={{ marginBlockEnd: "1rem" }}
                 >
-                   Editar estilo
+                    Editar estilo
         </h3>
 
                 <Form
@@ -125,23 +118,23 @@ export default ({
                     {isZodiac()}
 
                     <Form.Group controlId="exampleForm.ControlSelect1">
-                    <Form.Label>Signo</Form.Label>
-                    <Form.Control as="select" name="styleSigno" onChange={handleChange}>
-                        <option>Aries</option>
-                        <option>Tauro</option>
-                        <option>Géminis</option>
-                        <option>Cáncer</option>
-                        <option>Leo</option>
-                        <option>Virgo</option>
-                        <option>Libra</option>
-                        <option>Escorpio</option>
-                        <option>Sagitario</option>
-                        <option>Capricornio</option>
-                        <option>Acuario</option>
-                        <option>Piscis</option>
-                        <option>n/a</option>
-                    </Form.Control>
-                </Form.Group>
+                        <Form.Label>Signo</Form.Label>
+                        <Form.Control as="select" name="styleSigno" onChange={handleChange}>
+                            <option>Aries</option>
+                            <option>Tauro</option>
+                            <option>Géminis</option>
+                            <option>Cáncer</option>
+                            <option>Leo</option>
+                            <option>Virgo</option>
+                            <option>Libra</option>
+                            <option>Escorpio</option>
+                            <option>Sagitario</option>
+                            <option>Capricornio</option>
+                            <option>Acuario</option>
+                            <option>Piscis</option>
+                            <option>n/a</option>
+                        </Form.Control>
+                    </Form.Group>
 
                     <Form.Group controlId="formBasicCheckbox"></Form.Group>
                     {/* *****************

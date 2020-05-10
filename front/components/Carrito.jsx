@@ -1,12 +1,10 @@
 import React, { useState } from "react";
 import Card from "react-bootstrap/Card";
-import ListGroup from "react-bootstrap/ListGroup";
-import ListGroupItem from "react-bootstrap/ListGroupItem";
 import Button from "react-bootstrap/Button";
 import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
-import Modal from "react-bootstrap/Modal";
+
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTrashAlt } from "@fortawesome/free-regular-svg-icons";
@@ -147,8 +145,8 @@ export default ({
                     {e.digital ? (
                       <span>Digital&nbsp;</span>
                     ) : (
-                      <span>Marco: &nbsp;</span>
-                    )}{" "}
+                        <span>Marco: &nbsp;</span>
+                      )}{" "}
                     {selectedFrame[0] ? selectedFrame[0].name : null}&nbsp;
                     {e.size}
                   </Row>
@@ -156,6 +154,7 @@ export default ({
                     className="carrito-info-row"
                     style={{ textAlign: "initial" }}
                   >
+
                     
                     {selectedStyle[0]?
                     selectedStyle[0].name === "zodiac" ||
@@ -168,6 +167,7 @@ export default ({
                     {selectedStyle[0]?
                     selectedStyle[0].name === "zodiac" ||
                     selectedStyle[0].name === "Zodiac"
+
                       ? selectedStyle[0].tipografia
                       : null
                       
@@ -177,6 +177,7 @@ export default ({
                     className="carrito-info-row"
                     style={{ textAlign: "initial" }}
                   >
+
                     {selectedStyle[0]?
                     (selectedStyle[0].name === "zodiac" ||
                     selectedStyle[0].name === "Zodiac"
@@ -186,6 +187,7 @@ export default ({
                     {selectedStyle[0]?
                    ( selectedStyle[0].name === "zodiac" ||
                     selectedStyle[0].name === "Zodiac"
+
                       ? selectedStyle[0].signo
                       : null)
                       :null}
