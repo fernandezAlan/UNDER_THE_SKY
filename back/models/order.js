@@ -33,6 +33,9 @@ Order.init(
             type: Sequelize.STRING,
 
         },
+        totalPrice:{
+            type:Sequelize.INTEGER
+        },
         transactionNumber: {
             type: Sequelize.INTEGER,
             defaultValue: 0

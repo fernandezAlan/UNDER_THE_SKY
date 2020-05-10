@@ -25,3 +25,4 @@ export const ALL_STYLES="ALL_STYLES"
 export const DIGITAL = "DIGITAL"
 export const USER_ORDERS= "USER_ORDERS"
 export const ALL_FRAMES = 'ALL_FRAMES'
+export const TOTAL_PRICE = "TOTAL_PRICE"

@@ -3,13 +3,12 @@ import Carrito from "../components/Carrito";
 import { connect } from "react-redux";
 import { getCart, deleteProductData, modifyDataProduct, cartWithoutUser } from "../actions/cartActions"
 import { dataProduct } from "../actions/productDataActions"
-import { IdsForOrders } from "../actions/orderActions"
+import { IdsForOrders,totalPrice } from "../actions/orderActions"
 import Container from 'react-bootstrap/Container'
 import CheckoutCart from "../components/CheckoutCart"
 import { withRouter } from "react-router-dom"
 import { allStyles, getAllStyles, getAllFrames, allFrames } from "../actions/productsActions"
-import Row from 'react-bootstrap/Row'
-import Col from 'react-bootstrap/Col'
+
 
 
 
@@ -32,15 +31,17 @@ const mapDispatchToProps = (dispatch) => {
     deleteProductData: (id) => dispatch(deleteProductData(id)),
     IdsForOrders: (id) => dispatch(IdsForOrders(id)),
     modifyDataProduct: (id, quantity, user) => dispatch(modifyDataProduct(id, quantity, user)),
-    allFrames: (fss) => dispatch(allFrames(fss))
+    allFrames: (fss) => dispatch(allFrames(fss)),
+    totalPrice:(price)=>dispatch(totalPrice(price))
   }
 }
 
-class NavbarContainer extends React.Component {
+class CarritoContainer extends React.Component {
   constructor(props) {
     super();
     this.state={
-      refresh:true
+      refresh:true,
+      totalPrice:0
     }
 
     this.handleDelete = this.handleDelete.bind(this);
@@ -62,19 +63,41 @@ class NavbarContainer extends React.Component {
       })
 
     if (this.props.userEmail) {
-      this.props.getCart();
+      this.props.getCart().then(()=>{
+        if(this.props.dataProduct.length){
+      
+   
+          this.props.dataProduct.map(e=>{
+            this.setState({
+              totalPrice:this.state.totalPrice+=e.price
+            })
+          })
+        }  
+      });
     }
     else if (JSON.parse(localStorage.getItem("dataWithoutUser"))) {
       let dataProduct = JSON.parse(localStorage.getItem("dataWithoutUser"))
+      console.log("%c DATAPRODUCT","color: red",dataProduct)
+      if(dataProduct.length){
+        dataProduct.map(e=>{
+          this.setState({
+            totalPrice:this.state.totalPrice+=e.price
+          })
+        })
+      }
       this.props.cartWithoutUser(dataProduct)
     }
-      
-
-
-
-
-
   }
+      
+   
+
+   
+     
+
+
+
+
+
 
 
 
@@ -111,6 +134,7 @@ class NavbarContainer extends React.Component {
         else {
           this.props.history.push("/cart/checkout")
         }
+        this.props.totalPrice(this.state.totalPrice)
       }
     }
   }
@@ -173,7 +197,7 @@ class NavbarContainer extends React.Component {
 
 
 
-export default withRouter(connect(mapStateToProps, mapDispatchToProps)(NavbarContainer))
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(CarritoContainer))
 
 
 
