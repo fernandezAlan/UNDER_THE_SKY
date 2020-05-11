@@ -87,11 +87,23 @@ class SingleProductContainer extends React.Component {
   }
   handleSize(size) {
     this.props.selectSize(size);
+    this.setState({
+      selectedSize: size,
+    });
     localStorage.setItem("selectedSize", JSON.stringify(size));
+    
   }
   handleDigital(frame, size) {
     this.props.selectSize(size);
-    this.props.selectFrame(frame);
+    this.props.selectFrame({
+      id: 0,
+      name: "frameless",
+      price: 0,
+      imgType: "image/png",
+      imgName: "dummy.png",
+      imgData: { type: "Buffer", data: Array(4004) },
+      imgPath: "/public/src/img/dummy.png",
+    });
     // this.setState({
     //   selectedFrame: frame,
     // });
@@ -108,11 +120,7 @@ class SingleProductContainer extends React.Component {
         imgData: { type: "Buffer", data: Array(4004) },
         imgPath: "/public/src/img/dummy.png",
       },
-      selectedSize: {
-        id: 0,
-        name: "dummy",
-        price: 0,
-      },
+      selectedSize: size,
     });
   }
 
@@ -121,15 +129,26 @@ class SingleProductContainer extends React.Component {
     e.preventDefault();
     localStorage.setItem(
       "selectedStyle",
-      JSON.stringify(this.props.selectedStyle)
+      JSON.stringify(this.state.selectedStyle)
     );
     localStorage.setItem(
       "selectedSize",
-      JSON.stringify(this.props.selectedSize)
+      JSON.stringify(this.state.selectedSize)
     );
+    console.log('este es el estado cuando se manda click', this.state);
+    
+    this.props.selectSize(this.state.selectedSize)
     this.props.selectedDigital(this.state.digital);
     if (this.state.digital) {
-      this.props.selectFrame({});
+      this.props.selectFrame({
+        id: 0,
+        name: "frameless",
+        price: 0,
+        imgType: "image/png",
+        imgName: "dummy.png",
+        imgData: { type: "Buffer", data: Array(4004) },
+        imgPath: "/public/src/img/dummy.png",
+      });
     } else {
       this.props.selectFrame(JSON.parse(localStorage.getItem("selectedFrame")));
     }
@@ -160,7 +179,7 @@ class SingleProductContainer extends React.Component {
           digital={this.state.digital}
           handleDigital={this.handleDigital}
           selectedStyle={this.props.selectedStyle}
-          selectedSize={this.props.selectedSize}
+          selectedSize={this.state.selectedSize}
           selectedFrame={this.state.selectedFrame}
           toggleDefault={this.state.toggleDefault}
         />

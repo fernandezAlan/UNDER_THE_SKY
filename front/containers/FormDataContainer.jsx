@@ -88,6 +88,7 @@ class FormDataContainer extends React.Component {
                  frame:this.props.selectedFrame.name,
                  style:this.props.selectedStyle.name,
                  price:this.props.selectedSize.price+this.props.selectedFrame.price,
+                 
                  styleId:this.props.selectedStyle.id
              }
          ).then((res)=>{

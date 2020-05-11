@@ -4,6 +4,8 @@ import { connect } from "react-redux";
 import { addNewOrder, getPuntoDeEncuentro } from "../actions/orderActions";
 import { withRouter } from "react-router-dom";
 import { modifyData } from "../actions/productDataActions";
+import { cart } from "../actions/cartActions";
+
 
 const mapDispatchToProps = (dispatch, state) => {
   return {
@@ -12,6 +14,9 @@ const mapDispatchToProps = (dispatch, state) => {
     },
     getPuntoDeEncuentro: () => {
       dispatch(getPuntoDeEncuentro());
+    },
+    cleanCart: () => {
+      dispatch(cart([]));
     },
   };
 };
@@ -69,6 +74,10 @@ class CheckoutContainer extends React.Component {
     this.props.idsForOrders.map((e) => {
       modifyData({ bought: true, id: e });
     });
+    localStorage.removeItem("dataWithoutUser");
+    localStorage.removeItem("idForOrder");
+    this.props.cleanCart()
+
 
     this.props.history.push("/gracias");
   }
@@ -83,6 +92,8 @@ class CheckoutContainer extends React.Component {
 
   handleSubmit(e) {
     e.preventDefault();
+    let usuario = this.props.user.user;
+
     this.props.addNewOrder({
       user:
         Object.keys(usuario).length === 0 ? "invitado" : this.props.user.user,
@@ -93,10 +104,10 @@ class CheckoutContainer extends React.Component {
     this.props.idsForOrders.map((e) => {
       modifyData({ bought: true, id: e });
     });
-
     localStorage.removeItem("dataWithoutUser");
+    localStorage.removeItem("idForOrder");
+    this.props.cleanCart()
     this.props.history.push("/");
-
     this.props.history.push("/gracias");
   }
 

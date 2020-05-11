@@ -57,7 +57,7 @@ export default ({ dataProduct, handleSubmit,PreviousStep,BackStep }) => {
             Seguir comprando
             </Link>
           </Button>
-          <Button onClick={() => handleSubmit(dataProductsIds)} className="boton-outline">
+          <Button onClick={() => handleSubmit(dataProductsIds, total)} className="boton-outline">
             Finalizar compra
           </Button>
           
