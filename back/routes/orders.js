@@ -109,10 +109,7 @@ const orderEmail = (emailArr, orden) => {
 
 
 router.post("/addOrder", function (req, res) {
-console.log(
-  req.body
-);
-
+console.log("REQ.BODY:", req.body)
   let emailAdmins = [];
   let userOrder = {
     firstName:'',

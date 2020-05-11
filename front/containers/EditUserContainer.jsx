@@ -37,11 +37,7 @@ class EditUserContainer extends React.Component{
             repeatPassword:"",
             deleteUser: false
         }
-       
-       
             
-            
-           
         this.changeName=this.changeName.bind(this)
         this.changeLastName=this.changeLastName.bind(this)
         this.changeEmail=this.changeEmail.bind(this)
@@ -55,8 +51,6 @@ class EditUserContainer extends React.Component{
         }
             
 
-
-
 componentDidUpdate(prevProps, prevState) {
     if (prevProps !== this.props) {
         this.setState({
@@ -65,12 +59,7 @@ componentDidUpdate(prevProps, prevState) {
             email: this.props.user.email,
         })
     }
-  }
-    
-
-  
-  
-                    
+  }                 
 
     changeUser(e){
         this.setState({
@@ -84,10 +73,7 @@ componentDidUpdate(prevProps, prevState) {
             inputName:!this.state.inputName,
             inputLastName:false,
             inputEmail:false
-        })
-       
-        
-    
+        }) 
         
     }
     changeLastName(){
@@ -96,10 +82,7 @@ componentDidUpdate(prevProps, prevState) {
             inputEmail:false,
             inputName:false
         })
-    }
-        
-              
-           
+    }     
 
     changeEmail(){
         this.setState({
@@ -109,8 +92,6 @@ componentDidUpdate(prevProps, prevState) {
         })
     }
           
-          
-
     changePassword(){
         this.setState({
             inputPassword:!this.state.inputPassword,
@@ -118,9 +99,6 @@ componentDidUpdate(prevProps, prevState) {
         })
         console.log("changePassword:",this.state.inputPassword)
     }
-           
-         
-
 
     changeSubmit(){
 
@@ -146,17 +124,9 @@ componentDidUpdate(prevProps, prevState) {
            
             this.props.modifyUser(this.state)
         }
+    
     }
             
-            
-               
-               
-            
-             
-        
-
-
-    
             
     submitNewPassword(e){
         e.preventDefault()

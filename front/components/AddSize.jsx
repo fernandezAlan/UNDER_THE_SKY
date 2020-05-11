@@ -15,11 +15,14 @@ export default ({ handleChange, handleSizeSubmit }) => {
     padding: "3rem",
     borderRadius: "0px",
     boxShadow: "8px 8px 15px -10px rgba(0,0,0,0.39)",
+    justifyContent: "center",
+    alignItems: "center",
   };
 
   const divFormStyle = {
     display: "flex",
     justifyContent: "center",
+    alignItems: "center",
     marginBlockEnd: "5rem",
     marginBlockStart: "0.5rem",
   };

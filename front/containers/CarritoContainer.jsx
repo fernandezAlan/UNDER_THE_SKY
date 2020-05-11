@@ -12,8 +12,6 @@ import { allStyles, getAllStyles, getAllFrames, allFrames } from "../actions/pro
 
 
 
-
-
 const mapStateToProps = (state, ownProps) => {
   return {
     dataProduct: state.cart.dataProducts,
@@ -110,7 +108,7 @@ class CarritoContainer extends React.Component {
 
 
   handleDelete(id) {
-    this.props.deleteProductData(id);
+   
     if (!this.props.userEmail) {
       let dataProduct = JSON.parse(localStorage.getItem("dataWithoutUser"))
 
@@ -121,6 +119,9 @@ class CarritoContainer extends React.Component {
       })
       localStorage.setItem("dataWithoutUser", JSON.stringify(dataProduct))
       this.props.cartWithoutUser(dataProduct)
+    }
+    else{
+      this.props.deleteProductData(id);
     }
     this.setState({
       refresh: !this.state.refresh
