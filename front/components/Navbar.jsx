@@ -1,12 +1,13 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
+import { withRouter } from "react-router-dom";
+
 import Navbar from "react-bootstrap/Navbar";
 import Nav from "react-bootstrap/Nav";
 import Image from "react-bootstrap/Image";
 import { Col } from "react-bootstrap";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faBars } from "@fortawesome/free-solid-svg-icons";
-
+import { faBars, faShoppingBasket } from "@fortawesome/free-solid-svg-icons";
 
 export default ({
   cartItems,
@@ -14,14 +15,15 @@ export default ({
   User,
   hidden,
   handlePerfil,
+  closeDropdown,
   toggleDrop,
-  toggleDropdown
+  toggleDropdown,
 }) => {
   const [expanded, setExpanded] = useState(false);
 
   const dropdown = {
-    display: "inline-block"
-  }
+    display: "inline-block",
+  };
 
   let dropdownContent = {
     borderRadius: "5px",
@@ -33,21 +35,19 @@ export default ({
     backgroundColor: "#eae9e8",
     boxShadow: "0px 8px 16px 0px rgba(0,0,0,0.2)",
     padding: "12px 16px",
-    zIndex: "1"
-  }
+    zIndex: "1",
+  };
 
   if (toggleDrop) {
-    dropdownContent.display = "block"
-  }
-  else {
-    dropdownContent.display = "none"
+    dropdownContent.display = "block";
+  } else {
+    dropdownContent.display = "none";
   }
 
   if (User.email) {
-    dropdown.display = "inline-block"
-  }
-  else {
-    dropdown.display = "none"
+    dropdown.display = "inline-block";
+  } else {
+    dropdown.display = "none";
   }
 
   const cartLength = {
@@ -59,19 +59,19 @@ export default ({
     borderRadius: "50%",
     color: "white",
     marginLeft: "10px",
-    fontSize: "12px"
+    fontSize: "12px",
   };
 
   const cartButton = {
     color: "#6d6d6d",
     color: "rgb(109, 109, 109)",
-    zIndex: 10
+    zIndex: 10,
   };
 
   const navLogo = {
     height: "auto",
     maxHeight: "85px",
-    marginTopStart: "10px"
+    marginTopStart: "10px",
   };
 
   const navBarStyle = {
@@ -81,24 +81,20 @@ export default ({
     color: "#6d6d6d",
     textAlign: "center",
     zIndex: 11,
-    boxShadow: '8px 8px 15px -10px rgba(0, 0, 0, 0.25)'
-
+    boxShadow: "8px 8px 15px -10px rgba(0, 0, 0, 0.25)",
   };
 
   const navFont = {
-    color: "#102f51"
+    color: "#102f51",
+  };
+
+  const navIcon = {
+    color: "#d8a96d",
   };
 
   const navBarMenu = {
     textAlign: "center",
-
   };
-
-
-
-
-
-
 
   const loginLogout = () => {
     if (!User.email) {
@@ -113,17 +109,14 @@ export default ({
           }
         >
           Login
-      </Link>
+        </Link>
       );
     }
   };
 
-
-
-
   const navButton = {
     color: "#d8a96d",
-    border: "none"
+    border: "none",
   };
   let viewState = hidden ? hidden : null;
 
@@ -151,7 +144,7 @@ export default ({
               // md={4}
               // lg={6}
               style={navLogo}
-              src={'/src/img/logo.svg'}
+              src={"/src/img/logo.svg"}
               fluid
             />
           </Link>
@@ -159,7 +152,9 @@ export default ({
         <Navbar.Toggle
           aria-controls="basic-navbar-nav"
           style={navButton}
-          onClick={() => setExpanded(expanded ? false : "expanded")}
+          onClick={() => {
+            setExpanded(expanded ? false : "expanded");
+          }}
         >
           <FontAwesomeIcon icon={faBars} />
         </Navbar.Toggle>
@@ -179,78 +174,153 @@ export default ({
               >
                 Productos
               </Link>
-            </Nav.Link><Nav.Link>
-              <Link
-                style={navFont}
-                to="/contacto">
-                Contacto
-              </Link>
             </Nav.Link>
-            {User.email ? null : <Nav.Link>
+            <Nav.Link>
               <Link
                 style={navFont}
-                to="/register"
+                to="/contacto"
                 onClick={() =>
                   setTimeout(() => {
                     setExpanded(false);
                   }, 150)
                 }
               >
-                Registrate
+                Contacto
               </Link>
-            </Nav.Link>}
+            </Nav.Link>
 
-
+            {User.email ? null : (
+              <Nav.Link>
+                <Link
+                  style={navFont}
+                  to="/register"
+                  onClick={() =>
+                    setTimeout(() => {
+                      setExpanded(false);
+                    }, 150)
+                  }
+                >
+                  Registrate
+                </Link>
+              </Nav.Link>
+            )}
 
             <Nav.Link style={navFont}>
-              <div style={dropdown} onClick={toggleDropdown}>
+              <div style={dropdown} onClick={toggleDropdown} tabIndex="-1">
                 <span>Mi perfil</span>
                 <div style={dropdownContent}>
-                  <div style={{ marginBottom: "15px", borderBottom: "solid 1px gray" }}>
-                    <span>{User.type === "admin" ? <span style={{ color: "blue" }}>Administrador</span> : <br />}</span>
-                    <h6><strong>{User.firstName + " " + User.lastName}</strong> </h6>
-                    <span>{User.email}</span><br />
+                  <div
+                    style={{
+                      marginBottom: "15px",
+                      borderBottom: "solid 1px gray",
+                      overflow: "hidden",
+                    }}
+                  >
+                    <span>
+                      {User.type === "admin" ? (
+                        <span style={{ color: "blue" }}>Administrador</span>
+                      ) : (
+                        <br />
+                      )}
+                    </span>
+                    <h6>
+                      <strong>{User.firstName + " " + User.lastName}</strong>{" "}
+                    </h6>
+                    <span>{User.email}</span>
+                    <br />
                   </div>
                   <div>
-                    <Link style={navFont} to="/eladmin" onClick={() => setTimeout(() => { setExpanded(false) }, 150)}>
-                      {User.type === "admin" ? <span>Administrador UTS</span> : <br />}
+                    <Link
+                      style={navFont}
+                      tabIndex="-1"
+                      onMouseDown={() =>
+                        setTimeout(() => {
+                          closeDropdown
+                          setExpanded(false);
+                        }, 150)
+                      }
+                      to="/eladmin"
+                    >
+                      {User.type === "admin" ? (
+                        <span>Administrador UTS</span>
+                      ) : (
+                        <br />
+                      )}
                     </Link>
                   </div>
                   <div style={{ marginBottom: "15px" }}>
-                    <Link to="/usersOrders" ><span>Ver tus compras</span></Link><br />
-                    <Link to="/cart" ><span>Ver tu carrito</span></Link><br />
-                    <Link to="/editProfile"><span>Editar perfil</span></Link><br />
+                    <Link
+                      tabIndex="-1"
+                      onMouseDown={() =>
+                        setTimeout(() => {
+                          closeDropdown
+                          setExpanded(false);
+                        }, 150)
+                      }
+                      to="/usersOrders"
+                    >
+                      <span>Ver tus compras</span>
+                    </Link>
+                    <br />
+                    <Link
+                      tabIndex="-1"
+                      onMouseDown={() =>
+                        setTimeout(() => {
+                          closeDropdown
+                          setExpanded(false);
+                        }, 150)
+                      }
+                      to="/cart"
+                    >
+                      <span>Ver tu carrito</span>
+                    </Link>
+                    <br />
+                    <Link
+                      tabIndex="-1"
+                      onMouseDown={() =>
+                        setTimeout(() => {
+                          closeDropdown
+                          setExpanded(false);
+                        }, 150)
+                      }
+                      to="/editProfile"
+                    >
+                      <span>Editar perfil</span>
+                    </Link>
+                    <br />
                   </div>
                   <div>
-                    <span onClick={() => {
-                      handelLogout();
-                      setTimeout(() => {
-                        setExpanded(false);
-                      }, 150);
-                    }}
+                    <span
+                      onClick={() => {
+                        handelLogout();
+                        setTimeout(() => {
+                          setExpanded(false);
+                        }, 150);
+                      }}
                       style={navFont}
                     >
                       Cerrar Sesión
-              </span >
+                    </span>
                   </div>
                 </div>
               </div>
             </Nav.Link>
+            <Nav.Link>{loginLogout()}</Nav.Link>
             <Nav.Link>
-              {loginLogout()}
+              <Link 
+              tabIndex="0"
+              onMouseDown={() =>
+                setTimeout(() => {
+                  setExpanded(false);
+                }, 150)
+              }
+              style={navIcon} to="/cart">
+                <FontAwesomeIcon icon={faShoppingBasket} />
+              </Link>
             </Nav.Link>
-
           </Nav>
         </Navbar.Collapse>
       </Navbar>
     </div>
   );
 };
-
-
-
-
-
-
-
-

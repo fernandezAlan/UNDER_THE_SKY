@@ -109,6 +109,9 @@ const orderEmail = (emailArr, orden) => {
 
 
 router.post("/addOrder", function (req, res) {
+console.log(
+  req.body
+);
 
   let emailAdmins = [];
   let userOrder = {
@@ -124,12 +127,13 @@ router.post("/addOrder", function (req, res) {
   let entrega = {};
   let total = 0;
   let productDataIdArr = req.body.productDataId;
-  if (req.body.user) {
-    emailUser = req.body.user.user.email;
+  if (req.body.user !== 'invitado') {
+    emailUser = req.body.user.email;
     emailClients.push(emailUser);
     console.log(emailUser);
   }
-
+  console.log('body', req.body);
+  
   Promise.all([
 
     User.findAll({ where: { type: "admin" } }, { raw: true }).then((result) => {
@@ -141,8 +145,10 @@ router.post("/addOrder", function (req, res) {
       });
       return emailAdmins;
     }),
-    req.body.user
-    ?  User.findByPk(req.body.user.user.id).then((user) => {
+    req.body.user.user === {}
+    ?  User.findByPk(req.body.user.id).then((user) => {
+      console.log('UUARIOOOOOOO', user);
+      
         userOrder = {
           firstName:user.dataValues.firstName,
           lastName:user.dataValues.lastName,
@@ -173,8 +179,8 @@ router.post("/addOrder", function (req, res) {
             }),
 
         
-          req.body.user
-          ?  User.findByPk(req.body.user.user.id).then((user) => {
+          req.body.user !== 'invitado'
+          ?  User.findByPk(req.body.user.id).then((user) => {
               order.setUser(user);
             })
           : null;

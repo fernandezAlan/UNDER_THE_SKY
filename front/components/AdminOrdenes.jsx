@@ -9,7 +9,6 @@ import moment from "moment";
 import { Card, Popover, OverlayTrigger } from "react-bootstrap";
 import Spinner from "react-bootstrap/Spinner";
 
-
 export default ({
   selectedOrder,
   DataProducts,
@@ -21,29 +20,28 @@ export default ({
   handleStatus,
   allStyles,
 }) => {
-
   const styleFilter = {
     width: "50%",
-    margin:'auto',
-    display:'flex',
-    flexDirection:'column',
-    alignItems:'center',
-    justifyContent:'space-evenly',
-    marginTop:'2.5rem'
+    margin: "auto",
+    display: "flex",
+    flexDirection: "column",
+    alignItems: "center",
+    justifyContent: "space-evenly",
+    marginTop: "2.5rem",
   };
 
-  const styleFilterItem={
-    textAlign:'center',
-    marginTop:'10px'
-  }
+  const styleFilterItem = {
+    textAlign: "center",
+    marginTop: "10px",
+  };
 
   const puntoStyle = {
     display: "flex",
     flexWrap: "wrap",
-    backgroundColor: 'rgba(0,0,0,0)',
+    backgroundColor: "rgba(0,0,0,0)",
 
-    justifyContent:'center',
-    paddingBlockEnd:'3rem'
+    justifyContent: "center",
+    paddingBlockEnd: "3rem",
   };
 
   const [open, setOpen] = useState(false);
@@ -76,7 +74,13 @@ export default ({
         const popover = (
           <Popover id="popover-basic">
             <Popover.Title as="h3">Detalles</Popover.Title>
-            <Popover.Content style={{ backgroundColor: "#f7f4ed", maxHeight:'400px', overflow:'scroll' }}>
+            <Popover.Content
+              style={{
+                backgroundColor: "#f7f4ed",
+                maxHeight: "400px",
+                overflow: "scroll",
+              }}
+            >
               <tr>
                 <h6>
                   esta orden contiene {dataProduct.length}{" "}
@@ -130,14 +134,13 @@ export default ({
                       );
                     })}
                   </Row>
-
                 </Container>
               </tr>
             </Popover.Content>
           </Popover>
         );
         console.log(dataProduct);
-        
+
         return (
           <Card
             className="tarjetaproducto"
@@ -181,7 +184,7 @@ export default ({
 
               <Card.Text>
                 <strong>Email:</strong>
-                {dataProduct[0]?dataProduct[0].emailClient:null}
+                {dataProduct[0] ? dataProduct[0].emailClient : null}
               </Card.Text>
               <Card.Text>
                 <strong>Direccion: </strong> {e.address}
@@ -196,7 +199,9 @@ export default ({
                   placement="top"
                   overlay={popover}
                 >
-                  <Button className='boton-solido' size='sm'>Detalles de la orden</Button>
+                  <Button className="boton-solido" size="sm">
+                    Detalles de la orden
+                  </Button>
                 </OverlayTrigger>
               </>
             </Card.Body>
@@ -204,12 +209,16 @@ export default ({
         );
       });
     } else {
-      return<Container style={{marginTop:'50px', margin:'auto', textAlign:'center'}}>
-      <h3 > Cargando </h3>
-      <Spinner animation="border" role="status" variant="secondary">
-      <span className="sr-only">Cargando ordenes</span>
-      </Spinner>
-      </Container> 
+      return (
+        <Container
+          style={{ marginTop: "50px", margin: "auto", textAlign: "center" }}
+        >
+          <h3> Cargando </h3>
+          <Spinner animation="border" role="status" variant="secondary">
+            <span className="sr-only">Cargando ordenes</span>
+          </Spinner>
+        </Container>
+      );
     }
   };
 
@@ -217,39 +226,31 @@ export default ({
     <div>
       <div style={styleFilter}>
         <h3 style={{ textAlign: "center" }}>Búsqueda avanzada</h3>
-        <form >
+        <form>
           <Container>
-          <Container style={styleFilterItem}>
-              
-                <span>Por tipo de envío:</span>
-                
-            
-                <select value={envio} name="envio" onChange={handleChange}>
-                  <option value="todos">todos</option>
-                  <option value={false}>a domicilio</option>
-                  <option value={true}>en punto de entrega</option>
-                </select>
-           
+            <Container style={styleFilterItem}>
+              <span>Por tipo de envío:</span>
 
+              <select value={envio} name="envio" onChange={handleChange}>
+                <option value="todos">todos</option>
+                <option value={false}>a domicilio</option>
+                <option value={true}>en punto de entrega</option>
+              </select>
             </Container>
-            <Container style={styleFilterItem} >
-   
-                
-                <span>Por estado de la compra:</span>
-       
-                <select
-                  value={estadoDeCompra}
-                  name="estadoDeCompra"
-                  onChange={handleChange}
-                >
-                  <option value="todos">todos</option>
-                  <option value="inprocess">en proceso</option>
-                  <option value="delivered">enviada</option>
-                </select>
-          
+            <Container style={styleFilterItem}>
+              <span>Por estado de la compra:</span>
 
+              <select
+                value={estadoDeCompra}
+                name="estadoDeCompra"
+                onChange={handleChange}
+              >
+                <option value="todos">todos</option>
+                <option value="inprocess">en proceso</option>
+                <option value="delivered">enviada</option>
+              </select>
             </Container>
-            <Container style={styleFilterItem} >
+            <Container style={styleFilterItem}>
               <button
                 style={{ textAlign: "center" }}
                 onClick={handleSelectedOrder}
@@ -260,9 +261,7 @@ export default ({
           </Container>
         </form>
       </div>
-      <Container style={puntoStyle}>
-      {allOrders()}
-      </Container>
+      <Container style={puntoStyle}>{allOrders()}</Container>
     </div>
   );
 };

@@ -52,9 +52,15 @@ export default ({ dataProduct, handleSubmit,PreviousStep,BackStep }) => {
         </ListGroup.Item>
         
         <ListGroup.Item style={{ textAlign: "center" }}>
+        <Button className="boton-outline">
+            <Link to="/products/getProducts">
+            Seguir comprando
+            </Link>
+          </Button>
           <Button onClick={() => handleSubmit(dataProductsIds)} className="boton-outline">
             Finalizar compra
           </Button>
+          
         </ListGroup.Item>
       </ListGroup>
     </div>
@@ -87,7 +93,7 @@ export default ({ dataProduct, handleSubmit,PreviousStep,BackStep }) => {
         <ListGroup.Item>
           <div style={styleCheckout}>
             <span>total: </span>
-            <strong>${total}</strong>
+            <strong >${total}</strong>
           </div>
         </ListGroup.Item>
         

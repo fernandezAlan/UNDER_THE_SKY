@@ -38,6 +38,8 @@ const mapDispatchToProps=(dispatch)=>{
          this.handelLogout= this.handelLogout.bind(this)
          this.handlePerfil= this.handlePerfil.bind(this)
          this.toggleDropdown=this.toggleDropdown.bind(this)
+         this.closeDropdown=this.closeDropdown.bind(this)
+
      }
 
      componentDidMount(){
@@ -74,7 +76,19 @@ const mapDispatchToProps=(dispatch)=>{
     }
      
     toggleDropdown(){
+        console.log(
+            'TRIGGEREADO A cambiar'
+        );
+        
         this.setState({toggleDrop:!this.state.toggleDrop})
+    }
+
+    closeDropdown(){
+        console.log(
+            'TRIGGEREADO A CEERRARR'
+        );
+        
+        this.setState({toggleDrop:false})
     }
   
    
@@ -94,6 +108,7 @@ const mapDispatchToProps=(dispatch)=>{
                     handlePerfil={this.handlePerfil}
                     toggleDrop={this.state.toggleDrop}
                     toggleDropdown={this.toggleDropdown}
+                    closeDropdown={this.closeDropdown}
                 />
             </Headroom>
         )
