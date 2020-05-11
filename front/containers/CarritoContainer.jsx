@@ -1,180 +1,155 @@
 import React from "react";
 import Carrito from "../components/Carrito";
 import { connect } from "react-redux";
-import { getCart, deleteProductData, modifyDataProduct, cartWithoutUser } from "../actions/cartActions"
-import { dataProduct } from "../actions/productDataActions"
-import { IdsForOrders,totalPrice } from "../actions/orderActions"
-import Container from 'react-bootstrap/Container'
-import CheckoutCart from "../components/CheckoutCart"
-import { withRouter } from "react-router-dom"
-import { allStyles, getAllStyles, getAllFrames, allFrames } from "../actions/productsActions"
-
-
-
+import {
+  getCart,
+  deleteProductData,
+  modifyDataProduct,
+  cartWithoutUser,
+} from "../actions/cartActions";
+import { dataProduct } from "../actions/productDataActions";
+import { IdsForOrders, totalPrice } from "../actions/orderActions";
+import Container from "react-bootstrap/Container";
+import CheckoutCart from "../components/CheckoutCart";
+import { withRouter } from "react-router-dom";
+import {
+  allStyles,
+  getAllStyles,
+  getAllFrames,
+  allFrames,
+} from "../actions/productsActions";
 
 const mapStateToProps = (state, ownProps) => {
   return {
     dataProduct: state.cart.dataProducts,
     userEmail: state.user.user.email,
     Styles: state.products.allStyles,
-    Frames: state.products.allFrames
-  }
-}
-
+    Frames: state.products.allFrames,
+  };
+};
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    allStyles: data => dispatch(allStyles(data)),
+    allStyles: (data) => dispatch(allStyles(data)),
     dataToEdit: (data) => dispatch(dataProduct(data)),
     getCart: () => dispatch(getCart()),
     cartWithoutUser: (data) => dispatch(cartWithoutUser(data)),
     deleteProductData: (id) => dispatch(deleteProductData(id)),
     IdsForOrders: (id) => dispatch(IdsForOrders(id)),
-    modifyDataProduct: (id, quantity, user) => dispatch(modifyDataProduct(id, quantity, user)),
+    modifyDataProduct: (id, quantity, user) =>
+      dispatch(modifyDataProduct(id, quantity, user)),
     allFrames: (fss) => dispatch(allFrames(fss)),
-    totalPrice:(price)=>dispatch(totalPrice(price))
-  }
-}
+    totalPrice: (price) => dispatch(totalPrice(price)),
+  };
+};
 
 class CarritoContainer extends React.Component {
   constructor(props) {
     super();
 
-    this.state={
-      refresh:true,
-      totalPrice:0
-
-    }
+    this.state = {
+      refresh: true,
+      totalPrice: 0,
+    };
 
     this.handleDelete = this.handleDelete.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleQuantity = this.handleQuantity.bind(this);
-    this.handleEditData = this.handleEditData.bind(this)
-    this.BackStep = this.BackStep.bind(this)
-    this.BackStep = this.BackStep.bind(this)
+    this.handleEditData = this.handleEditData.bind(this);
+    this.BackStep = this.BackStep.bind(this);
+    this.BackStep = this.BackStep.bind(this);
   }
 
   componentDidMount() {
-    getAllStyles()
-      .then(result => {
-        this.props.allStyles(result.data)
-      })
-    getAllFrames()
-      .then(result => {
-        this.props.allFrames(result.data)
-      })
+    getAllStyles().then((result) => {
+      this.props.allStyles(result.data);
+    });
+    getAllFrames().then((result) => {
+      this.props.allFrames(result.data);
+    });
 
     if (this.props.userEmail) {
-      this.props.getCart().then(()=>{
-        if(this.props.dataProduct.length){
       
-   
-          this.props.dataProduct.map(e=>{
+      this.props.getCart().then(() => {
+        if (this.props.dataProduct.length) {
+          this.props.dataProduct.map((e) => {
+            console.log("%c DATAPRODUCT", "color: yellow", 'ENTRE AL if ELSE loggeado');
+
+            console.log('PRUEBA DE SUMA CANTDAD', e.price, e.quantity);
+            
             this.setState({
-              totalPrice:this.state.totalPrice+=e.price
-            })
-          })
-        }  
+              totalPrice: (this.state.totalPrice += e.price * e.quantity),
+            });
+          });
+        }
       });
-    }
-    else if (JSON.parse(localStorage.getItem("dataWithoutUser"))) {
-      let dataProduct = JSON.parse(localStorage.getItem("dataWithoutUser"))
-      console.log("%c DATAPRODUCT","color: red",dataProduct)
-      if(dataProduct.length){
-        dataProduct.map(e=>{
+    } else if (JSON.parse(localStorage.getItem("dataWithoutUser"))) {
+      let dataProduct = JSON.parse(localStorage.getItem("dataWithoutUser"));
+      console.log("%c DATAPRODUCT", "color: yellow", 'ENTRE AL ELSE');
+
+      console.log("%c DATAPRODUCT", "color: red", dataProduct);
+      if (dataProduct.length) {
+        dataProduct.map((e) => {
+          console.log('PRUEBA DE SUMA CANTDAD', e.price, e.quantity);
           this.setState({
-            totalPrice:this.state.totalPrice+=e.price
-          })
-        })
+            totalPrice: (this.state.totalPrice += e.price * e.quantity),
+          });
+        });
       }
-      this.props.cartWithoutUser(dataProduct)
+      this.props.cartWithoutUser(dataProduct);
     }
-
   }
-      
-   
-
-   
-     
-
-
-
-
-
-
-
-
-
-
 
   handleDelete(id) {
-   
     if (!this.props.userEmail) {
-      let dataProduct = JSON.parse(localStorage.getItem("dataWithoutUser"))
+      let dataProduct = JSON.parse(localStorage.getItem("dataWithoutUser"));
 
       dataProduct.map((e, i) => {
         if (e.id === id) {
-          dataProduct.splice(i, 1)
+          dataProduct.splice(i, 1);
         }
-      })
-      localStorage.setItem("dataWithoutUser", JSON.stringify(dataProduct))
-      this.props.cartWithoutUser(dataProduct)
-    }
-    else{
+      });
+      localStorage.setItem("dataWithoutUser", JSON.stringify(dataProduct));
+      this.props.cartWithoutUser(dataProduct);
+    } else {
       this.props.deleteProductData(id);
     }
     this.setState({
-      refresh: !this.state.refresh
-    })
+      refresh: !this.state.refresh,
+    });
   }
 
-
-  handleSubmit(id, digital) {
+  handleSubmit(id, total) {
     if (this.props.dataProduct.length) {
       this.props.IdsForOrders(id);
-      localStorage.setItem("idForOrder", id)
-      if (digital) {
-        this.props.history.push("/checkoutDigital")
+      localStorage.setItem("idForOrder", id);
+
+      if (this.props.nextStep) {
+        this.props.nextStep();
+      } else {
+        this.props.history.push("/cart/checkout");
       }
-      else {
-        if (this.props.nextStep) {
-          this.props.nextStep()
-        }
-        else {
-          this.props.history.push("/cart/checkout")
-        }
-        this.props.totalPrice(this.state.totalPrice)
-      }
+      this.props.totalPrice(total);
     }
   }
-
-
-
 
   handleQuantity(id, quantity) {
     if (quantity >= 1) {
-      this.props.modifyDataProduct(
-        id,
-        quantity,
-        !!this.props.userEmail
-      )
+            this.props.modifyDataProduct(id, quantity, !!this.props.userEmail)
     }
+    
   }
 
   handleEditData(data) {
-    this.props.dataToEdit(data)
+    this.props.dataToEdit(data);
     this.props.history.push("/cart/editData");
   }
 
   BackStep() {
-    this.props.previousStep()
+    this.props.previousStep();
   }
 
-
-
-
   render() {
-
     return (
       <div>
         <Container className="carrito-vistageneral">
@@ -197,25 +172,10 @@ class CarritoContainer extends React.Component {
           />
         </Container>
       </div>
-
-
     );
   }
 }
 
-
-
-
-export default withRouter(connect(mapStateToProps, mapDispatchToProps)(CarritoContainer))
-
-
-
-
-
-
-
-
-
-
-
-
+export default withRouter(
+  connect(mapStateToProps, mapDispatchToProps)(CarritoContainer)
+);

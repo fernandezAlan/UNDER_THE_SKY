@@ -124,12 +124,13 @@ console.log("REQ.BODY:", req.body)
   let entrega = {};
   let total = 0;
   let productDataIdArr = req.body.productDataId;
-  if (req.body.user) {
-    emailUser = req.body.user.user.email;
+  if (req.body.user !== 'invitado') {
+    emailUser = req.body.user.email;
     emailClients.push(emailUser);
     console.log(emailUser);
   }
-
+  console.log('body', req.body);
+  
   Promise.all([
 
     User.findAll({ where: { type: "admin" } }, { raw: true }).then((result) => {
@@ -141,8 +142,10 @@ console.log("REQ.BODY:", req.body)
       });
       return emailAdmins;
     }),
-    req.body.user
-    ?  User.findByPk(req.body.user.user.id).then((user) => {
+    req.body.user.user === {}
+    ?  User.findByPk(req.body.user.id).then((user) => {
+      console.log('UUARIOOOOOOO', user);
+      
         userOrder = {
           firstName:user.dataValues.firstName,
           lastName:user.dataValues.lastName,
@@ -173,8 +176,8 @@ console.log("REQ.BODY:", req.body)
             }),
 
         
-          req.body.user
-          ?  User.findByPk(req.body.user.user.id).then((user) => {
+          req.body.user !== 'invitado'
+          ?  User.findByPk(req.body.user.id).then((user) => {
               order.setUser(user);
             })
           : null;

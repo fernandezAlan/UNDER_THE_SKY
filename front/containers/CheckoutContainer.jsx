@@ -4,6 +4,8 @@ import { connect } from "react-redux";
 import { addNewOrder, getPuntoDeEncuentro } from "../actions/orderActions";
 import { withRouter } from "react-router-dom";
 import { modifyData } from "../actions/productDataActions";
+import { cart } from "../actions/cartActions";
+
 
 const mapDispatchToProps = (dispatch, state) => {
   return {
@@ -12,6 +14,9 @@ const mapDispatchToProps = (dispatch, state) => {
     },
     getPuntoDeEncuentro: () => {
       dispatch(getPuntoDeEncuentro());
+    },
+    cleanCart: () => {
+      dispatch(cart([]));
     },
   };
 };
@@ -24,7 +29,7 @@ const mapStateToProps = (state, ownprops) => {
     lastNameUser: state.user.user.lastName,
     PuntoDeEncuentro: state.orders.PuntoDeEncuentro,
     idsForOrders: state.orders.idsForOrders,
-    totalPrice:state.orders.totalPrice
+    totalPrice: state.orders.totalPrice,
   };
 };
 
@@ -56,16 +61,23 @@ class CheckoutContainer extends React.Component {
   }
 
   handleEncuentro(id) {
-    
+    let usuario = this.props.user.user;
+    console.log(this.props.user.user);
+
     this.props.addNewOrder({
-      user: this.props.user ,
-      order: { deliveryPoint: true },
+      user:
+        Object.keys(usuario).length === 0 ? "invitado" : this.props.user.user,
+      order: { deliveryPoint: true, totalPrice: this.state.totalPrice },
       productDataId: this.props.idsForOrders,
       PuntoDeEncuentro: id,
     });
     this.props.idsForOrders.map((e) => {
       modifyData({ bought: true, id: e });
     });
+    localStorage.removeItem("dataWithoutUser");
+    localStorage.removeItem("idForOrder");
+    this.props.cleanCart()
+
 
     this.props.history.push("/gracias");
   }
@@ -80,17 +92,22 @@ class CheckoutContainer extends React.Component {
 
   handleSubmit(e) {
     e.preventDefault();
+    let usuario = this.props.user.user;
+
     this.props.addNewOrder({
+      user:
+        Object.keys(usuario).length === 0 ? "invitado" : this.props.user.user,
+
       order: this.state,
       productDataId: this.props.idsForOrders,
     });
     this.props.idsForOrders.map((e) => {
       modifyData({ bought: true, id: e });
     });
-
     localStorage.removeItem("dataWithoutUser");
+    localStorage.removeItem("idForOrder");
+    this.props.cleanCart()
     this.props.history.push("/");
-
     this.props.history.push("/gracias");
   }
 
