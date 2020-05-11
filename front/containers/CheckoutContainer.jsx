@@ -39,7 +39,8 @@ class CheckoutContainer extends React.Component {
       postCode: "",
       productDataId: "",
       deliveryPoint: false,
-      price:0
+      totalPrice:0,
+      productsQuantity:0
     };
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -49,7 +50,8 @@ class CheckoutContainer extends React.Component {
   componentDidMount() {
     this.props.getPuntoDeEncuentro();
     this.setState({
-      totalPrice:this.props.totalPrice
+      totalPrice:this.props.totalPrice,
+      productsQuantity:this.props.idsForOrders.length
     })
   }
 
