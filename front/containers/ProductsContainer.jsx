@@ -43,8 +43,7 @@ class ProductsContainer extends React.Component {
 
 
   handleClick(selectedStyle) {
-    console.log("style", selectedStyle)
-    this.props.selectStyle(selectedStyle)
+   
     localStorage.setItem("selectedStyle", JSON.stringify(selectedStyle))
 
 

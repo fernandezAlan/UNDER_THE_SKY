@@ -61,7 +61,7 @@ export default ({
     margin: "20px",
   };
 
-  console.log(state);
+ 
 
   return (
     <Form onSubmit={handleSubmit} style={formStyle}>

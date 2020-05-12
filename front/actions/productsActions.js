@@ -59,7 +59,7 @@ export const selectDigital = digital => ({
 
 export const fetchNewProduct = (body) => dispatch => {
 
-    console.log('eso es el body del front', body)
+
 
     return axios.post("/api/products/newProduct", body)
         .then(res => res.data)
@@ -79,21 +79,21 @@ export const getAllStyles = () => {
 }
 
 export const getAllFrames = () => {
-    console.log('ENTRE A LA ACCION DE AGARRAR TODOS LOS CUADROS, PA')
+   
     return axios.post("/api/products/getAllFrames")
 }
 
 
 
 export const fetchStyle = (styleId) => dispatch => {
-    console.log('esto es conseguime estilo')
+   
     axios.get(`/api/products/styles/${styleId}`)
         .then(res => res.data)
         .then(style => { dispatch(selectStyle(style)) })
 }
 
 export const fetchSize = (sizeId) => dispatch => {
-    console.log('esto es el conseguime tamano')
+   
     axios.get(`/api/products/size/${sizeId}`)
         .then(res => dispatch(selectSize(res.data)))
 }
@@ -105,7 +105,7 @@ export const fetchFrame = (frameId) => dispatch => {
 
 
 export const fetchProduct = (id) => dispatch => {
-    console.log('eso es el body del front')
+  
     return axios.get(`/api/products/${id}`)
         .then(res => res.data)
         .then(result => { dispatch(SelectedProducts(result)) })

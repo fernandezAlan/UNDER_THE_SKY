@@ -76,18 +76,13 @@ const mapDispatchToProps=(dispatch)=>{
     }
      
     toggleDropdown(){
-        console.log(
-            'TRIGGEREADO A cambiar'
-        );
+     
         
         this.setState({toggleDrop:!this.state.toggleDrop})
     }
 
     closeDropdown(){
-        console.log(
-            'TRIGGEREADO A CEERRARR'
-        );
-        
+    
         this.setState({toggleDrop:false})
     }
   

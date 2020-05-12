@@ -50,7 +50,7 @@ class FormDataContainer extends React.Component {
         modifyData(this.state)
         .then((res)=>{
             this.props.dataProduct(res.data)
-            console.log("this.props.userEmail",this.props.userEmail)
+         
             if(!this.props.userEmail){
                let dataWithoutUser=res.data
                if(this.arrOfData.length!==1){

@@ -15,7 +15,7 @@ const TarjetaProducto = function ({ styleProduc, handleClick }) {
     fontSize: "0.7rem",
   };
 const imgurl = styleProduc.imgPath.toString().split("/public")[1]
-console.log( 'ACAAAAAAAAAAAAAAAAAAAA', imgurl)
+
   return (
     <div>
       <Card className="tarjetaproducto">

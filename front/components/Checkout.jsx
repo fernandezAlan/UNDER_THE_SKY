@@ -41,7 +41,7 @@ export default ({
 
   };
 
-  console.log("esto es mi puntod de encuentro",PuntoDeEncuentro)
+ 
  
 
   const [open, setOpen] = useState(false);

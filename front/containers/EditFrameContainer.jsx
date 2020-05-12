@@ -47,16 +47,16 @@ class EditFrameContainer extends React.Component {
     handleChange(e) {
         const key = e.target.name;
         const value = e.target.value;
-        console.log(e.target.name, e.target.value);
+     
         this.setState({
             [key]: value
         });
-        console.log('hola', this.state)
+     
 
     }
 
     handleFile(e) {
-        console.log(e.target.files[0]);
+      
         this.setState({ frameImg: e.target.files[0] })
     }
 

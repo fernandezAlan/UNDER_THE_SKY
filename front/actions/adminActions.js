@@ -179,19 +179,19 @@ export const newStyle = (newStyle) =>
     )
 
 export const editStyle = (styleId, updtdStyle) => {
-  console.log('LLEGUE AL PUT Y ESTO ES EL', updtdStyle)
+ 
   axios.put(`/api/admin/editStyle/${styleId}`, updtdStyle)
 }
 
 
 export const editFrame = (frameId, updtdFrame) => {
-  console.log('LLEGUE AL PUT Y ESTO ES EL', updtdFrame)
+ 
   axios.put(`/api/admin/editFrame/${frameId}`, updtdFrame)
 }
 
 
 export const editSize = (sizeId, updtdSize) => {
-  console.log('LLEGUE AL PUT Y ESTO ES EL', updtdSize, sizeId)
+ 
   axios.put(`/api/admin/editSize/${sizeId}`, updtdSize)
 }
 

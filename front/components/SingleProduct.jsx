@@ -82,8 +82,7 @@ export default ({
     ? selectedStyle.imgPath.toString().split("/public")[1]
     : null;
 
-  console.log("PRERETURN SELECTED FRAMEEEEEEEEEE", selectedFrame);
-
+ 
   return (
     <div style={singleStyle}>
       {/* //AQUI ESTA LA TARJETA */}
