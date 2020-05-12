@@ -62,7 +62,7 @@ class CheckoutContainer extends React.Component {
 
   handleEncuentro(id) {
     let usuario = this.props.user.user;
-    console.log(this.props.user.user);
+
 
     this.props.addNewOrder({
       user:

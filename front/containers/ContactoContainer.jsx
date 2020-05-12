@@ -23,7 +23,7 @@ export default class ContactoContainer extends React.Component{
 
       ///////////////////// la funcion sendEmail no esta llegando al back //////////
     handleClick(){
-        console.log("holaaa",this.state)
+    
         sendEmail(this.state)
     }
 
