@@ -133,7 +133,7 @@ export default ({
         </Row>
       </Container>
       <div style={display("alert")}>
-        <Alert variant="danger">¡No puedes dejar un campo vacio!</Alert>
+        <Alert variant="danger">¡No podés dejar un campo vacio!</Alert>
       </div>
       <div style={{ textAlign: "center", marginTop: "20px" }}>
         <Button variant="dark" onClick={changeSubmit}>

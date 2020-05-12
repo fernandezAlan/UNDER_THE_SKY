@@ -1,155 +1,62 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link
-      rel="stylesheet"
-      href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
-      integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh"
-      crossorigin="anonymous"
-    />
 
-    <link
-      href="https://fonts.googleapis.com/css2?family=Assistant:wght@200;300;400;600;700;800&display=swap"
-      rel="stylesheet"
-    />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Lilita+One&display=swap"
-      rel="stylesheet"
-    />
-    <!-- <style>
-      .mail-container {
-        width: 30rem;
-        height: auto;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-        margin: auto;
-        text-align: center;
-        margin-block-start: 5rem;
-        margin-block-end: 5rem;
-        background-size: 100%;
-        background-image: url("https://i.imgur.com/mpm9Q26.png");
-        background-attachment: fixed;
-        background-position: center;
-        border-color: #a39e93;
-        border-style: solid;
-        border-width: 1px;
-        border-radius: 20px;
-      }
+    <!--
 
-      .mail-logo {
-        width: 300px;
-        height: auto;
-      }
+      En este documento se prepara el formato del email pero se envia desde el archivo .js con el mismo noombre
+     -->
 
-      .mail-texto {
-        margin-left: 3rem;
-        margin-right: 3rem;
-        color: #868279;
-        font-weight: 200;
-      }
 
-      .mail-texto-muted {
-        margin-left: 3rem;
-        margin-right: 3rem;
-        color: #9e9a8f;
-        font-weight: 200;
-        font-size: 0.7rem;
-      }
 
-      .gracias-display {
-        font-weight: 100 !important;
-        font-size: 2rem;
-      }
-    </style> -->
-  </head>
 
-  <body>
-    <div
-      class="mail-container"
-      id="mail-registro"
-      style="
-        width: 100%;
-        max-width: 800px;
-        height: auto;
-        margin: auto;
-        text-align: center;
-        margin-block-start: 5rem;
-        margin-block-end: 5rem;
-        background-size: 100%;
-        background-image: url('https://i.imgur.com/GHi9A2E.png');
-        background-attachment: fixed;
-        background-position: center;
-        border-color: #a39e93;
-        border-style: solid;
-        border-width: 1px;
-        border-radius: 20px;
-      "
-    >
-    
-      <div class="mail-logo" style="width: 300px; height: auto;margin-left: auto;margin-right: auto;">
-        <img
-          style="width: 100%; height: auto; "
-          src="https://i.imgur.com/dDq2o0a.png"
-          alt="UTS-Logo"
-        />
-      </div>
-      <h1
-        class="mail-titulo gracias-display"
-        style="font-weight: 200 !important; font-size: 2rem;color: #868279;"
-      >
-        !Nueva Orden `${{hola}}`!
-      </h1>
 
-      <p
-        class="mail-texto"
-        style="
-          margin-left: 3rem;
-          margin-right: 3rem;
-          color: #868279;
-          font-weight: 200;
-        "
-      >
-        Tu usuario fue eliminado con exito, <br> 
-        si queres volver
-        puedes registrarte 
-        en
-        <a href="https://www.google.com">nuestra web.</a>
+    <span style="width: 30%; padding: 10px; height: auto; background: #ededed;">
+      <h2 style="margin-block-start: 0.15em; margin-block-end: 0.15em;">
+        <strong>Producto Nº:</strong>${producto.id}
+        
+      <br>
+        <strong>Variables:</strong>
+      <br>
+        <strong>Digital:</strong>${producto.digital}
+      <br>
+        <strong>Estilo:</strong>${producto.styleInfo}
+      <br>
+        <strong>Marco:</strong>${producto.frame}
+      <br>
+        <strong>Tamaño:</strong>${producto.size}
+      <br>
+        <strong>Precio:</strong>${producto.price}
+      <br>
+        <strong>Cantidad:</strong>${producto.quantity}
+      <br>
+        <strong>Subtotal:</strong>${
+          producto.quantity * producto.price
+        }
       </p>
-
-      <p
-        class="mail-texto"
-        style="
-          margin-left: 3rem;
-          margin-right: 3rem;
-          color: #868279;
-          font-weight: 200;
-        "
-      >
-        ¡Encontranos en <a href="https://www.instagram.com/undertheskydeco">instagram!</a> 
+    </span>
+  
+    <span style="width: 30%; padding: 10px; height: auto;background: #e8e8e8;">
+      <p style="margin-block-start: 0.15em; margin-block-end: 0.15em;">
+        <strong>Información:</strong>
+      <br>
+        <strong>Nombre o frase:</strong>${producto.name}
+      <br>
+        <strong>Fecha:</strong>${producto.date}
+      <br>
+        <strong>Hora:</strong>${producto.time}
+      <br>
+        <strong>Lugar:</strong>${producto.content}
+      <br>
+        <strong>Idioma:</strong>${producto.language}
       </p>
-
-      <p
-        class="mail-texto-muted"
-        style="
-          margin-left: 3rem;
-          margin-right: 3rem;
-          color: #9e9a8f;
-          font-weight: 200;
-          font-size: 0.7rem;
-        "
-      >
-        Tu privacidad es importante para nosotros. <br />
-        Nunca compartiremos tu dirección de email.
-      </p>
-    </div>
-  </body>
-</html>
+    </span>
 
 
-<h2>Nueva orden numero `${orderInfo.id}`</h2>
-<h3>Cliente: `${userOrder.name}``${userOrder.lastName}`</h3>
-<p>Punto de entrega: `${orderInfo.deliveryPoint}`</p>
+
+
+
+
+
+
+
+
+
+

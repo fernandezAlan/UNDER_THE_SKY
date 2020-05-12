@@ -1,5 +1,6 @@
 const Sequelize = require('sequelize')
 const sequelize = require('../db/index.js');
+const Style = require('./style')
 
 class ProductData extends Sequelize.Model { }
 ProductData.init({
@@ -37,6 +38,11 @@ ProductData.init({
     digital:{
         type:Sequelize.BOOLEAN,
         defaultValue:false
+    },   
+    styleInfo:{
+        type:Sequelize.STRING,
+        defaultValue:'nada aun'
+
     },
     size:{
         type:Sequelize.STRING

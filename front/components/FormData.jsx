@@ -5,15 +5,11 @@ import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 
 import Container from "react-bootstrap/Container";
-import moment from "moment"
+import moment from "moment";
 import Calendar from "react-calendar";
 import "react-calendar/dist/Calendar.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import {
-  faArrowRight,
-  faArrowLeft,
-} from "@fortawesome/free-solid-svg-icons";
-
+import { faArrowRight, faArrowLeft } from "@fortawesome/free-solid-svg-icons";
 
 export default ({
   handleChange,
@@ -74,7 +70,8 @@ export default ({
             className="react-calendar"
           />
           <p className="info-single-product">
-            Fecha seleccionada: <strong>{moment(state.date).format('DD/MM/YYYY')}</strong>
+            Fecha seleccionada:{" "}
+            <strong>{moment(state.date).format("DD/MM/YYYY")}</strong>
           </p>
         </Form.Group>
       </Container>
@@ -109,16 +106,32 @@ export default ({
             value={state.content}
           />
         </Form.Group>
+
         <Form.Group controlId="formBasicLanguage">
           <Form.Label>Idioma</Form.Label>
-          <Form.Control
-            type="text"
-            placeholder="Español"
-            onChange={handleChange}
-            name="language"
-            value={state.language}
-          />
+          <Form.Control as="select" name="language" onChange={handleChange}>
+            <option>Selecciona</option>
+            <option>Español</option>
+            <option>Ingles</option>
+            <option>Otro</option>
+          </Form.Control>
         </Form.Group>
+
+        {state.language === "" ||
+        state.language === "Ingles" ||
+        state.language === "Español" ? null : (
+          <Form.Group controlId="formBasicLanguage">
+            <Form.Label>Otro </Form.Label>
+            <p className="text-muted">Sujeto a disponibilidad</p>
+            <Form.Control
+              type="text"
+              placeholder="Otro"
+              onChange={handleChange}
+              name="language"
+            />
+          </Form.Group>
+        )}
+
         <Form.Group controlId="formBasicEmail">
           <Form.Label>Email</Form.Label>
           <Form.Control
@@ -139,14 +152,17 @@ export default ({
               className="boton-solido"
               type="submit"
             >
-
               <FontAwesomeIcon icon={faArrowLeft} />
             </Button>
           ) : null}
 
           <Button
             disabled={
-              !state.emailClient || !state.content || !state.name || !state.time || !state.language
+              !state.emailClient ||
+              !state.content ||
+              !state.name ||
+              !state.time ||
+              !state.language
             }
             className="boton-solid"
             type="submit"

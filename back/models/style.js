@@ -14,6 +14,7 @@ Style.init(
     },
     tipografia: {
       type: Sequelize.STRING,
+      defaultValue:'n/a'
     },
     signo: {
       type: Sequelize.ENUM({

@@ -26,6 +26,7 @@ import EditSizeContainer from "../containers/EditSizeContainer";
 import EditFrameContainer from '../containers/EditFrameContainer'
 import EditStyleContainer from '../containers/EditStyleContainer'
 import ContactoContainer from '../containers/ContactoContainer'
+import GraciasContacto from "../components/GraciasContacto"
 
 
 
@@ -79,6 +80,8 @@ class Main extends React.Component {
           <Route path="/usersOrders" exact component={comprasUsuarioContainer} />
           <Route path="/admin/getOrders" exact component={AdminOrdenesContainer} />
           <Route path="/gracias" exact component={Gracias} />
+          <Route path="/graciascontacto" exact component={GraciasContacto} />
+
           <Route
             path="/admin/getOrders"
             exact
