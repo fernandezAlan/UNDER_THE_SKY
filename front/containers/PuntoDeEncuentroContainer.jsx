@@ -57,7 +57,7 @@ class PuntoDeEncuentroContainer extends React.Component {
 
   handleDelete(id) {
     deletePunto(id);
-    console.log("este es mi iddd papa", id);
+   
   }
 
   render() {

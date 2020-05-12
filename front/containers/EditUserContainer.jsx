@@ -97,7 +97,7 @@ componentDidUpdate(prevProps, prevState) {
             inputPassword:!this.state.inputPassword,
          
         })
-        console.log("changePassword:",this.state.inputPassword)
+      
     }
 
     changeSubmit(){

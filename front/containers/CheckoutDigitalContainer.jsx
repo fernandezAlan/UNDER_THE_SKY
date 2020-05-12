@@ -59,12 +59,11 @@ class CheckoutContainer extends React.Component {
 
             this.props.IdsForOrders(idForOrder)
         }
-        console.log("allProducts", this.props.allProducts)
+      
         if (this.props.allProducts[0]) {
-            console.log("allProducts:", this.props.allProducts)
+         
             selectedProduct = this.props.allProducts.filter(f => {
-                console.log("FILTER id", f.id)
-                console.log("FILTER idproduct", this.props.idOfProduct)
+             
                 return f.id === this.props.idOfProduct
             })
             selectedProduct = selectedProduct[0]
@@ -76,7 +75,7 @@ class CheckoutContainer extends React.Component {
 
 
     render() {
-        console.log("selectedProduct:", selectedProduct)
+     
         return (
             <div style={container}>
                 <span>te enviaremos tu cuadro al siguiente email: <strong>{selectedProduct ? selectedProduct.emailClient : <span></span>}</strong></span><button style={styleButton}>cambiar email</button>

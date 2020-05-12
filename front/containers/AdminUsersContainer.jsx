@@ -45,7 +45,7 @@ class AdminUsersContainer extends React.Component {
     this.setState({
       [key]: value
     }); 
-    console.log("este es mi input",this.state.input)
+   
   }
 
   render() {

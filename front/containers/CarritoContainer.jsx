@@ -73,9 +73,9 @@ class CarritoContainer extends React.Component {
       this.props.getCart().then(() => {
         if (this.props.dataProduct.length) {
           this.props.dataProduct.map((e) => {
-            console.log("%c DATAPRODUCT", "color: yellow", 'ENTRE AL if ELSE loggeado');
+            
 
-            console.log('PRUEBA DE SUMA CANTDAD', e.price, e.quantity);
+         
             
             this.setState({
               totalPrice: (this.state.totalPrice += e.price * e.quantity),
@@ -85,12 +85,10 @@ class CarritoContainer extends React.Component {
       });
     } else if (JSON.parse(localStorage.getItem("dataWithoutUser"))) {
       let dataProduct = JSON.parse(localStorage.getItem("dataWithoutUser"));
-      console.log("%c DATAPRODUCT", "color: yellow", 'ENTRE AL ELSE');
-
-      console.log("%c DATAPRODUCT", "color: red", dataProduct);
+     
       if (dataProduct.length) {
         dataProduct.map((e) => {
-          console.log('PRUEBA DE SUMA CANTDAD', e.price, e.quantity);
+     
           this.setState({
             totalPrice: (this.state.totalPrice += e.price * e.quantity),
           });

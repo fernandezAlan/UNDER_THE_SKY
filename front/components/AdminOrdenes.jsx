@@ -139,7 +139,7 @@ export default ({
             </Popover.Content>
           </Popover>
         );
-        console.log(dataProduct);
+        
 
         return (
           <Card

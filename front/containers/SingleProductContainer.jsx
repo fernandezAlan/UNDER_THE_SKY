@@ -135,7 +135,7 @@ class SingleProductContainer extends React.Component {
       "selectedSize",
       JSON.stringify(this.state.selectedSize)
     );
-    console.log('este es el estado cuando se manda click', this.state);
+   
     
     this.props.selectSize(this.state.selectedSize)
     this.props.selectedDigital(this.state.digital);

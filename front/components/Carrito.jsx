@@ -41,7 +41,7 @@ export default ({
     justifyContent: "space-between",
   };
 
-  console.log("%c STYLE:","color: blue; border: 1px solid blue",Styles);
+ 
 
   return (
     <Container>
@@ -59,8 +59,7 @@ export default ({
         let imgFrameUrl = selectedFrame[0]
           ? selectedFrame[0].imgPath.slice(7)
           : null;
-        console.log("selectedFrame", selectedFrame);
-        console.log("%c selectedStyle:","color: red; border: 1px solid red",selectedStyle);
+       
         quantity = e.quantity;
 
         return (

@@ -131,7 +131,7 @@ class FormDataContainer extends React.Component {
     }
         
     render() {
-        console.log("DATE:",this.state.date)
+      
           return (
               <div>
                   <h3 className="titulopagina">Información</h3>

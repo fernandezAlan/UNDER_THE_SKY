@@ -43,14 +43,14 @@ class EditSizeContainer extends React.Component {
     }
 
     handleChange(e) {
-        console.log(e.target.value)
+       
         this.setState({ [e.target.name]: e.target.value });
     }
 
 
     handleSubmit(e) {
         e.preventDefault();
-        console.log('hola papu, gracias')
+     
         editSize(this.props.match.params.id, {
             name: this.state.size,
             price: this.state.sizePrice

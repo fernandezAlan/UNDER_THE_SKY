@@ -38,7 +38,7 @@ export default ({
   };
 
   const display = string => {
-    console.log("display:", state[string]);
+   
     const inputPassword = {
       display: "none",
       border: "solid 1px gray",

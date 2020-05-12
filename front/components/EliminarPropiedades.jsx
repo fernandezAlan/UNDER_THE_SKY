@@ -21,10 +21,7 @@ export default ({
   const botonSelecc = {
     fontSize: "0.7rem",
   };
-  console.log("estilos", styles);
-  console.log("FRAMES", frames);
-  console.log("SIZESS", sizes);
-
+ 
   return (
     <Tabs
       className="tab-container"

@@ -45,7 +45,7 @@ class EditStyleContainer extends React.Component {
 
         const key = e.target.name;
         const value = e.target.value;
-        console.log(e.target.name, e.target.value);
+       
         this.setState({
             [key]: value
         });
@@ -53,7 +53,7 @@ class EditStyleContainer extends React.Component {
     }
 
     handleStyleFile(e) {
-        console.log(e.target.files[0]);
+      
         this.setState({ styleImg: e.target.files[0] })
     }
 
@@ -66,7 +66,7 @@ class EditStyleContainer extends React.Component {
         styleUpload.append("styleColor", this.state.styleColor)
         styleUpload.append("styleTipo", this.state.styleTipo)
         styleUpload.append("styleSigno", this.state.styleSigno)
-        console.log('esteeselestyloeditado', styleUpload)
+      
 
         editStyle(this.props.match.params.id, styleUpload)
         this.props.history.push("/eladmin")

@@ -72,7 +72,7 @@ class AdminProductsContainer extends React.Component {
     }
 
     handleFile(e) {
-        console.log(e.target.files[0]);
+     
         this.setState({ frameImg: e.target.files[0] })
     }
 
@@ -80,7 +80,7 @@ class AdminProductsContainer extends React.Component {
 
         const key = e.target.name;
         const value = e.target.value;
-        console.log(e.target.name, e.target.value);
+      
         this.setState({
             [key]: value
         });
@@ -102,7 +102,7 @@ class AdminProductsContainer extends React.Component {
 
     handleSizeSubmit(e) {
         e.preventDefault();
-        console.log('hola papu, gracias')
+      
         newSize({
             name: this.state.size,
             price: this.state.sizePrice,
@@ -113,7 +113,7 @@ class AdminProductsContainer extends React.Component {
     }
 
     handleStyleFile(e) {
-        console.log(e.target.files[0]);
+       
         this.setState({ styleImg: e.target.files[0] })
     }
 
