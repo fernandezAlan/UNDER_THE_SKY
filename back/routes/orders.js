@@ -4,6 +4,8 @@ const Order = require("../models/order");
 const User = require("../models/user");
 const ProductData = require("../models/productData");
 const PuntoDeEncuentro = require("../models/puntoDeEncuentro");
+const mailParaAdmins = require("../mailTemplates/newOrderTemplates");
+const nodemailer = require("nodemailer");
 
 
 
@@ -64,7 +66,7 @@ router.get("/getPuntoDeEncuentro", function (req, res) {
 */
 
 
-const orderEmail = (emailArr, orden) => {
+const orderEmail = (emailAdmins, orderInfo, userOrder, emailClients, productsInOrder, pde, entrega) => {
   const transporter = nodemailer.createTransport({
     service: "gmail",
     auth: {
@@ -82,29 +84,39 @@ const orderEmail = (emailArr, orden) => {
       to: `${adminEmail}`,
       subject: `Nueva compra, orden ${orderInfo.id}`,
       // text: `Felicidades ${content}! Ya tenés una cuenta de UnderTheSky!!`,
-      html:  
-        '<h1>'
-        
-       ,
+      html:  mailParaAdmins.mailParaAdmins(orderInfo, userOrder, emailClients, productsInOrder, pde, entrega), 
     };
 
+    transporter.sendMail(mailOrderAdmin, function (error, info) {
+      console.log("senMail returned!");
+      if (error) {
+        console.log("ERROR!!!!!!", error);
+      } else {
+        console.log("Email sent: " + info.response);
+      }
+    });
+  })
 
+  emailClients.map((clientEmail)=>{
+    const mailOrderAdmin = {
+      from: "undertheskydeco024@gmail.com",
+      to: `${clientEmail}`,
+      subject: `Nueva compra, orden ${orderInfo.id}`,
+      // text: `Felicidades ${content}! Ya tenés una cuenta de UnderTheSky!!`,
+      html:  mailParaAdmins.mailParaAdmins(orderInfo, userOrder, emailClients, productsInOrder, pde, entrega), 
+    };
 
-
+    transporter.sendMail(mailOrderAdmin, function (error, info) {
+      console.log("senMail returned!");
+      if (error) {
+        console.log("ERROR!!!!!!", error);
+      } else {
+        console.log("Email sent: " + info.response);
+      }
+    });
 
   })
-  
 
-
-  
-  transporter.sendMail(mailOrderAdmin, function (error, info) {
-    console.log("senMail returned!");
-    if (error) {
-      console.log("ERROR!!!!!!", error);
-    } else {
-      console.log("Email sent: " + info.response);
-    }
-  });
 };
 
 
@@ -112,8 +124,8 @@ router.post("/addOrder", function (req, res) {
 console.log("REQ.BODY:", req.body)
   let emailAdmins = [];
   let userOrder = {
-    firstName:'',
-    lastName:'',
+    firstName:'Usuario',
+    lastName:'Invitado',
     email:''
   };
   let emailUser = "Usuario invitado";
@@ -142,9 +154,10 @@ console.log("REQ.BODY:", req.body)
       });
       return emailAdmins;
     }),
-    req.body.user.user === {}
-    ?  User.findByPk(req.body.user.id).then((user) => {
-      console.log('UUARIOOOOOOO', user);
+
+    
+    req.body.user.firstName
+    ?  (User.findByPk(req.body.user.id).then((user) => {
       
         userOrder = {
           firstName:user.dataValues.firstName,
@@ -152,7 +165,7 @@ console.log("REQ.BODY:", req.body)
           email:user.dataValues.email
         }
         return userOrder
-      })
+      }))
     : null,
 
     req.body.productDataId.map((e) => {
@@ -193,6 +206,7 @@ console.log("REQ.BODY:", req.body)
           transactionNumber: order.dataValues.transactionNumber,
           id: order.dataValues.id,
           deliveryPoint: order.dataValues.deliveryPoint,
+          totalPrice: order.dataValues.totalPrice,
           updatedAt: order.dataValues.updatedAt,
           createdAt: order.dataValues.createdAt,
         };
@@ -229,7 +243,7 @@ console.log("REQ.BODY:", req.body)
     console.log("orderinfo", orderInfo);
     console.log("punto de encuentro", pde);
     console.log("direccion de entrega", entrega);
-
+    orderEmail(emailAdmins, orderInfo, userOrder, emailClients, productsInOrder, pde, entrega)
     res.send(orderInfo);
   });
 });

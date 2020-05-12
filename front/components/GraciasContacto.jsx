@@ -23,14 +23,11 @@ export default ()=>{
         }} >
         
                 <h1 className={"gracias-display"}>
-                    Under The Sky 
+                !Gracias por contactarte!
                 </h1>
                 <h2 className={"gracias-display"}>
-                    !Muchas Gracias Por Tu Compra!
+                    Estaremos respondiendo tu consulta lo antes posible
                 </h2>
-                <p>
-                   Te enviaremos la información de pago al mail
-                </p>
                 <p>Hecho con <FontAwesomeIcon style={{color:'#c04040'}} icon={faHeart} /></p>
                 <p>
                     <Link to="/">Volver al inicio</Link>

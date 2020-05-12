@@ -235,7 +235,7 @@ router.get("/getOrders", function (req, res) {
   });
 });
 
-const changeStatusMail = (email, content) => {
+const changeStatusMail = (user, content) => {
 
   const transporter = nodemailer.createTransport({
     service: "gmail",
@@ -249,12 +249,17 @@ const changeStatusMail = (email, content) => {
   });
   const mailOptions = {
     from: "undertheskydeco024@gmail.com",
-    to: `${email}`,
-    subject: `Lamentamos verte partir ${content}`,
-    html: { path: "./mailTemplates/userDelete.html" },
+    to: `${user.email}`,
+    subject: `Cambio de estado de orden  ${content.id}`,
+    html:`<h3> Hola ${user.firstName} ${user.lastName}</h3>
+    <p>Tu orden numero ${content.id} cambio a ${content.status} <br>
+        !Cada vez estás mas cerca de tu producto! <br>
+        para mas información entra a www.undertheskydeco.com
+    </p>`
+
+
+
   };
-  console.log(email)
-  console.log(content)
   console.log("sending email", mailOptions);
   transporter.sendMail(mailOptions, function (error, info) {
     console.log("senMail returned!");
@@ -269,14 +274,27 @@ const changeStatusMail = (email, content) => {
 
 router.put("/changeStatus", function (req, res) {
   console.log("BODY.", req.body);
+  let orderUpdated={};
   Order.findByPk(req.body.orderId).then(function (order) {
     console.log(order);
     
-    order.update({ status: req.body.status }).then(function (newOrder) {
+    order.update({ status: req.body.status })
+
+    .then(function (newOrder) {
+      orderUpdated = newOrder
+      {newOrder.userId
+      ?(User.findByPk(newOrder.userId).then((user)=>{
+        console.log('user antes de enviar mmail deecambio',user)
+        changeStatusMail(user, orderUpdated)
+      })):null
+      }
+      
       res.json(newOrder);
     });
   });
 });
+
+
 
 router.delete("/deleteOrder/:id", function (req, res) {
   console.log("params", req.params);
@@ -375,28 +393,6 @@ router.delete("/deleteProduct", function (req, res) {
     });
 });
 
-// /////////DISPLAY//////////////////////
-// router.get("/getDisplay", function (req, res) {
-//   Display.findAll().then(function (display) {
-//     res.json(display);
-//   });
-// });
-// router.post("/newDisplay", function (req, res) {
-//   Display.create(req.body).then(function () {
-//     res.sendStatus(200);
-//   });
-// });
-
-// router.delete("/deleteDisplay", function (req, res) {
-
-//     Display.findByPk(req.body.displayId)
-//         .then(function (style) {
-//             style.destroy()
-//         })
-//         .then(function () {
-//             res.sendStatus(200)
-//         })
-// })
 ///////////////// PUNTOS DE ENCUENTRO /////////////
 router.post("/newPunto", function (req, res) {
   console.log("entre papaaaaaaa");

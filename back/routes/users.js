@@ -144,8 +144,9 @@ router.delete("/delete", function (req, res) {
 });
 
 router.post("/sendEmail", function (req, res) {
-  userDelete(req.body.email, req.body);
-  console.log("Enviado con exito papá");
+  emailSend(req.body.email, req.body);
+  emailSendAdmins(req.body)
+  console.log(req.body);
 });
 
 const userDelete = (email, content) => {
@@ -180,12 +181,12 @@ const userDelete = (email, content) => {
   });
 };
 
-const emailSend = (data) => {
+const emailSend = (data, content) => {
   const transporter = nodemailer.createTransport({
     service: "gmail",
     auth: {
-      user: process.env.USER_EMAIL,
-      pass: process.env.USER_PASSWORD
+      user: "undertheskydeco024@gmail.com",
+      pass: "Bajoelcielo1-",
     },
     tls: {
       rejectUnauthorized: false,
@@ -193,9 +194,9 @@ const emailSend = (data) => {
   });
   const mailOptions = {
     from: "undertheskydeco024@gmail.com",
-    to: `${data.email}`,
-    subject: "Contacto underthesky",
-    text: ` "NOMBRE": ${data.name}, "EMAIL": ${data.email}, ${data.mensaje}`,
+    to: `${data}`,
+    subject: `Hola ${content.name}`,
+    html: { path: "./mailTemplates/contacto.html" },
   };
   console.log("sending email", mailOptions);
   transporter.sendMail(mailOptions, function (error, info) {
@@ -207,5 +208,40 @@ const emailSend = (data) => {
     }
   });
 };
+
+const emailSendAdmins = (content) => {
+  const transporter = nodemailer.createTransport({
+    service: "gmail",
+    auth: {
+      user: "undertheskydeco024@gmail.com",
+      pass: "Bajoelcielo1-",
+    },
+    tls: {
+      rejectUnauthorized: false,
+    },
+  });
+
+  User.findAll({ where: { type: "admin" } }, { raw: true }).then((result) => {
+    result.map((user) => {
+      console.log('enviado form de contacto a', user.email)
+      const mailOptions = {
+        from: "undertheskydeco024@gmail.com",
+        to: `${user.dataValues.email}`,
+        subject: `Nuevo mensaje de ${content.name}`,
+        text: `Mensaje de ${content.name}, email: ${content.email}, mensaje:${content.mensaje}`,
+      };
+      console.log("sending email", mailOptions);
+      transporter.sendMail(mailOptions, function (error, info) {
+        console.log("senMail returned!");
+        if (error) {
+          console.log("ERROR!!!!!!", error);
+        } else {
+          console.log("Email sent: " + info.response);
+        }
+      });
+    });
+
+
+})};
 
 module.exports = router;
