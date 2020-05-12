@@ -5,6 +5,11 @@ const fileUpload = require("express-fileupload");
 const fs = require("fs");
 const nodemailer = require("nodemailer");
 
+const NODE_ENV = process.env.NODE_ENV || "development";
+require ('dotenv').config({
+  path:`.env.${NODE_ENV}`
+})
+
 
 const multer = require("multer");
 
@@ -240,15 +245,15 @@ const changeStatusMail = (user, content) => {
   const transporter = nodemailer.createTransport({
     service: "gmail",
     auth: {
-      user: "undertheskydeco024@gmail.com",
-      pass: "Bajoelcielo1-",
+      user: process.env.USER_EMAIL,
+      pass: process.env.USER_PASSWORD,
     },
     tls: {
       rejectUnauthorized: false,
     },
   });
   const mailOptions = {
-    from: "undertheskydeco024@gmail.com",
+    from: process.env.USER_EMAIL,
     to: `${user.email}`,
     subject: `Cambio de estado de orden  ${content.id}`,
     html:`<h3> Hola ${user.firstName} ${user.lastName}</h3>
@@ -330,15 +335,15 @@ const userDelete = (email, content) => {
   const transporter = nodemailer.createTransport({
     service: "gmail",
     auth: {
-      user: "undertheskydeco024@gmail.com",
-      pass: "Bajoelcielo1-",
+      user: process.env.USER_EMAIL,
+      pass: process.env.USER_PASSWORD,
     },
     tls: {
       rejectUnauthorized: false,
     },
   });
   const mailOptions = {
-    from: "undertheskydeco024@gmail.com",
+    from: process.env.USER_EMAIL,
     to: `${email}`,
     subject: `Lamentamos verte partir ${content}`,
     html: { path: "./mailTemplates/userDelete.html" },

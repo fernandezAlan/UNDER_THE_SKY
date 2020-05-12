@@ -9,18 +9,18 @@ require ('dotenv').config({
 })
 
 const email = (email, content) => {
-  const transporter = nodemailer.createTransport({
+    const transporter = nodemailer.createTransport({
     service: "gmail",
     auth: {
-      user: "undertheskydeco024@gmail.com",
-      pass: "Bajoelcielo1-",
+      user: process.env.USER_EMAIL,
+      pass: process.env.USER_PASSWORD,
     },
     tls: {
       rejectUnauthorized: false,
     },
   });
   const mailOptions = {
-    from: "undertheskydeco024@gmail.com",
+    from: process.env.USER_EMAIL,
     to: `${email}`,
     subject: `Bienvenido ${content}! Ya tenés una cuenta de UnderTheSky!!`,
     // text: `Felicidades ${content}! Ya tenés una cuenta de UnderTheSky!!`,
@@ -41,15 +41,15 @@ const emailLogin = (email, content) => {
   const transporter = nodemailer.createTransport({
     service: "gmail",
     auth: {
-      user: "undertheskydeco024@gmail.com",
-      pass: "Bajoelcielo1-",
+      user: process.env.USER_EMAIL,
+      pass: process.env.USER_PASSWORD,
     },
     tls: {
       rejectUnauthorized: false,
     },
   });
   const mailOptions = {
-    from: "undertheskydeco024@gmail.com",
+    from: process.env.USER_EMAIL,
     to: `${email}`,
     subject: `Nuevo inicio de sesión de ${content}`,
     // text: `Felicidades ${content}! Ya tenés una cuenta de UnderTheSky!!`,
@@ -154,15 +154,15 @@ const userDelete = (email, content) => {
   const transporter = nodemailer.createTransport({
     service: "gmail",
     auth: {
-      user: "undertheskydeco024@gmail.com",
-      pass: "Bajoelcielo1-",
+      user: process.env.USER_EMAIL,
+      pass: process.env.USER_PASSWORD,
     },
     tls: {
       rejectUnauthorized: false,
     },
   });
   const mailOptions = {
-    from: "undertheskydeco024@gmail.com",
+    from: process.env.USER_EMAIL,
     to: `${email}`,
     subject: `Lamentamos verte partir ${content.name}`,
     // text: `Felicidades ${content}! Ya tenés una cuenta de UnderTheSky!!`,
@@ -185,15 +185,15 @@ const emailSend = (data, content) => {
   const transporter = nodemailer.createTransport({
     service: "gmail",
     auth: {
-      user: "undertheskydeco024@gmail.com",
-      pass: "Bajoelcielo1-",
+      user: process.env.USER_EMAIL,
+      pass: process.env.USER_PASSWORD,
     },
     tls: {
       rejectUnauthorized: false,
     },
   });
   const mailOptions = {
-    from: "undertheskydeco024@gmail.com",
+    from: process.env.USER_EMAIL,
     to: `${data}`,
     subject: `Hola ${content.name}`,
     html: { path: "./mailTemplates/contacto.html" },
@@ -213,8 +213,8 @@ const emailSendAdmins = (content) => {
   const transporter = nodemailer.createTransport({
     service: "gmail",
     auth: {
-      user: "undertheskydeco024@gmail.com",
-      pass: "Bajoelcielo1-",
+      user: process.env.USER_EMAIL,
+      pass: process.env.USER_PASSWORD,
     },
     tls: {
       rejectUnauthorized: false,
@@ -225,7 +225,7 @@ const emailSendAdmins = (content) => {
     result.map((user) => {
       console.log('enviado form de contacto a', user.email)
       const mailOptions = {
-        from: "undertheskydeco024@gmail.com",
+        from: process.env.USER_EMAIL,
         to: `${user.dataValues.email}`,
         subject: `Nuevo mensaje de ${content.name}`,
         text: `Mensaje de ${content.name}, email: ${content.email}, mensaje:${content.mensaje}`,
