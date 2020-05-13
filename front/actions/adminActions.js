@@ -100,7 +100,7 @@ export const changeStatus = function (usertype, idUser) {
 
 
 export const deleteUser = (idUser) => {
-  axios.delete(`/api/admin/deleteUser/${idUser}`)
+ return axios.delete(`/api/admin/deleteUser/${idUser}`)
 }
 
 
