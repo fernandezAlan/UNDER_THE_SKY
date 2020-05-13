@@ -404,7 +404,7 @@ select:-webkit-autofill:focus {
     height: auto;
     flex-wrap: nowrap;
     white-space: nowrap;
-    overflow-x: scroll;
+    overflow-x: hidden;
     overflow-y: hidden;
     /* flex-basis: auto;
     -webkit-flex-basis:21rem, */

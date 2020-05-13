@@ -31,14 +31,14 @@ class AdminProductsContainer extends React.Component {
         this.state = {
             size: "",
             sizePrice: 0,
-            sizeType: '',
+            sizeType: 'selecciona',
             frame: "",
             framePrice: 0,
             frameImg: null,
             styleName: '',
             styleColor: '',
             styleImg: null,
-            styleTipo: '',
+            styleTipo: 'n/a',
             styleSigno: 'n/a'
 
         };
@@ -80,6 +80,8 @@ class AdminProductsContainer extends React.Component {
 
         const key = e.target.name;
         const value = e.target.value;
+        console.log([key], value);
+        
       
         this.setState({
             [key]: value
@@ -182,6 +184,7 @@ class AdminProductsContainer extends React.Component {
                     <AddSize handleChange={this.handleChange}
                         checkboxLogin={this.checkboxLogin}
                         handleSizeSubmit={this.handleSizeSubmit}
+                        sizeType={this.state.sizeType}
                         alertNull={this.state.alertNull}
                         alertPass={this.state.alertPass} />
                 </Tab>

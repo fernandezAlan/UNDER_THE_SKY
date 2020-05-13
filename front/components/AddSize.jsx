@@ -7,7 +7,7 @@ import Card from "react-bootstrap/Card";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPaperPlane } from "@fortawesome/free-solid-svg-icons";
 
-export default ({ handleChange, handleSizeSubmit }) => {
+export default ({ handleChange, handleSizeSubmit, sizeType }) => {
   const formStyle = {
     width: "80%",
     maxWidth: "800px",
@@ -58,19 +58,36 @@ export default ({ handleChange, handleSizeSubmit }) => {
           <Form.Group controlId="exampleForm.ControlSelect1">
             <Form.Label>Tipo</Form.Label>
             <Form.Control as="select" name="sizeType" onChange={handleChange}>
+            <option>selecciona</option>
               <option>digital</option>
               <option>impreso</option>
             </Form.Control>
-          </Form.Group>
-          <Form.Group controlId="formBasicCheckbox"></Form.Group>
-          <Button
-            className="boton-outline"
-            type="submit"
-            style={{ marginBlockStart: "0.5rem", marginBlockEnd: "1rem" }}
-            onClick={handleSizeSubmit}
-          >
-            <FontAwesomeIcon icon={faPaperPlane} />
-          </Button>
+            </Form.Group>
+            <Form.Group controlId="formBasicCheckbox"></Form.Group>
+
+          {
+            sizeType === 'selecciona'
+              ? (<Button
+                className="boton-outline"
+                type="submit"
+                style={{ marginBlockStart: "0.5rem", marginBlockEnd: "1rem" }}
+                onClick={handleSizeSubmit}
+                disabled
+              >
+                <FontAwesomeIcon icon={faPaperPlane} />
+              </Button>)
+              :(<Button
+                className="boton-outline"
+                type="submit"
+                style={{ marginBlockStart: "0.5rem", marginBlockEnd: "1rem" }}
+                onClick={handleSizeSubmit}
+              >
+                <FontAwesomeIcon icon={faPaperPlane} />
+              </Button>)
+          }
+
+          
+          
         </Form>
 
       </Card>
