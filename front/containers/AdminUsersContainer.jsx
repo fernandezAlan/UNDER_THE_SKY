@@ -30,7 +30,10 @@ class AdminUsersContainer extends React.Component {
   }
   handleDelete(user) {
     deleteUser(user)
-    this.props.getUsers()
+    .then(()=>{
+      this.props.getUsers()
+    })
+    
   }
  
 
