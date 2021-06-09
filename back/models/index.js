@@ -34,5 +34,5 @@ module.exports = {
   ProductData,
   Display,
   Order,
-  PuntoDeEncuentro
+  PuntoDeEncuentro,
 };

@@ -144,7 +144,7 @@ export default ({
               // md={4}
               // lg={6}
               style={navLogo}
-              src={"/src/img/logo.svg"}
+              src={"/src/img/logo.png"}
               fluid
             />
           </Link>

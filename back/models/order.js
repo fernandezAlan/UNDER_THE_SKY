@@ -1,54 +1,44 @@
-const Sequelize = require('sequelize');
-const sequelize = require('../db/index.js');
-const moment =require("moment")
+const { Model, DataTypes } = require("sequelize");
+const sequelize = require("../db/index.js");
 
-class Order extends Sequelize.Model { }
+class Order extends Model {}
 Order.init(
-    {
-        status: {
-            type: Sequelize.ENUM('cart', 'delivered', 'inprocess', 'printing'),
-            defaultValue: 'inprocess'
-        },
-        deliveryPoint: {
-            type: Sequelize.BOOLEAN,
-            defaultValue: true
-        },
-        address: {
-            type: Sequelize.STRING,
-
-        },
-        city: {
-            type: Sequelize.STRING,
-
-        },
-        country: {
-            type: Sequelize.STRING,
-
-        },
-        state: {
-            type: Sequelize.STRING,
-
-        },
-        postCode: {
-            type: Sequelize.STRING,
-
-        },
-        totalPrice:{
-            type:Sequelize.INTEGER
-        },
-        productsQuantity:{
-            type: Sequelize.INTEGER
-        },
-        transactionNumber: {
-            type: Sequelize.INTEGER,
-            defaultValue: 0
-        }
-
-
-    }, { sequelize, modelName: 'order' });
+  {
+    status: {
+      type: DataTypes.ENUM("cart", "delivered", "inprocess", "printing"),
+      defaultValue: "inprocess",
+    },
+    deliveryPoint: {
+      type: DataTypes.BOOLEAN,
+      defaultValue: true,
+    },
+    address: {
+      type: DataTypes.STRING,
+    },
+    city: {
+      type: DataTypes.STRING,
+    },
+    country: {
+      type: DataTypes.STRING,
+    },
+    state: {
+      type: DataTypes.STRING,
+    },
+    postCode: {
+      type: DataTypes.STRING,
+    },
+    totalPrice: {
+      type: DataTypes.INTEGER,
+    },
+    productsQuantity: {
+      type: DataTypes.INTEGER,
+    },
+    transactionNumber: {
+      type: DataTypes.INTEGER,
+      defaultValue: 0,
+    },
+  },
+  { sequelize, modelName: "order" }
+);
 
 module.exports = Order;
-
-
-
-  

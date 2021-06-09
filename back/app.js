@@ -36,7 +36,7 @@ app.use(
   session({
     secret: "bootcamp",
     resave: true,
-    saveUninitialized: true
+    saveUninitialized: true,
   })
 );
 
@@ -47,11 +47,11 @@ passport.use(
   new LocalStrategy(
     {
       usernameField: "email",
-      passwordField: "password"
+      passwordField: "password",
     },
-    function(email, password, done) {
+    function (email, password, done) {
       User.findOne({ where: { email } })
-        .then(user => {
+        .then((user) => {
           if (!user) {
             return done(null, false, { message: "Incorrect username." });
           }
@@ -67,12 +67,12 @@ passport.use(
 );
 
 //Serialize
-passport.serializeUser(function(user, done) {
+passport.serializeUser(function (user, done) {
   done(null, user.id);
 });
 
-passport.deserializeUser(function(id, done) {
-  User.findByPk(id).then(user => done(null, user));
+passport.deserializeUser(function (id, done) {
+  User.findByPk(id).then((user) => done(null, user));
 });
 
 //Rutas de back
@@ -80,13 +80,13 @@ app.use("/api", routes);
 app.use(fileUpload());
 
 //servimos el index
-app.use("/*", function(req, res, next) {
+app.use("/*", function (req, res, next) {
   res.sendFile(__dirname + "/public/index.html");
 });
 
-db.sync({ force: false }).then(function() {
+db.sync({ force: false }).then(function () {
   console.log("database ready");
-  app.listen("3000", function() {
+  app.listen("3000", function () {
     console.log("Server on port 3000");
   });
 });

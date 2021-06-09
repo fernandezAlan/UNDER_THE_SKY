@@ -1,23 +1,23 @@
-const Sequelize = require("sequelize");
+const { Model, DataTypes } = require("sequelize");
 const sequelize = require("../db/index.js");
 
-class Style extends Sequelize.Model {}
+class Style extends Model {}
 Style.init(
   {
     name: {
-      type: Sequelize.STRING,
+      type: DataTypes.STRING,
       allowNull: false,
     },
     color: {
-      type: Sequelize.STRING,
+      type: DataTypes.STRING,
       allowNull: false,
     },
     tipografia: {
-      type: Sequelize.STRING,
-      defaultValue:'n/a'
+      type: DataTypes.STRING,
+      defaultValue: "n/a",
     },
     signo: {
-      type: Sequelize.ENUM({
+      type: DataTypes.ENUM({
         values: [
           "n/a",
           "aries",
@@ -34,20 +34,20 @@ Style.init(
           "piscis",
         ],
       }),
-      defaultValue:'n/a'
+      defaultValue: "n/a",
     },
     imgType: {
-      type: Sequelize.STRING,
+      type: DataTypes.STRING,
     },
     imgName: {
-      type: Sequelize.STRING,
+      type: DataTypes.STRING,
     },
     imgData: {
-      type: Sequelize.BLOB("long"),
+      type: DataTypes.BLOB,
       allowNull: false,
     },
     imgPath: {
-      type: Sequelize.STRING,
+      type: DataTypes.STRING,
       allowNull: false,
     },
   },

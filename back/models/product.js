@@ -1,13 +1,13 @@
-const Sequelize = require("sequelize");
+const { Model, DataTypes } = require("sequelize");
 const sequelize = require("../db/index.js");
 
-class Product extends Sequelize.Model { }
+class Product extends Model {}
 Product.init(
   {
     digital: {
-      type: Sequelize.BOOLEAN,
-      defaultValue: false
-    }
+      type: DataTypes.BOOLEAN,
+      defaultValue: false,
+    },
   },
   { sequelize, modelName: "product" }
 );

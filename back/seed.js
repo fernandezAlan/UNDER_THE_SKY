@@ -15,7 +15,6 @@ const productData = [];
 const ordersData = [];
 const usersData = [];
 
-
 const sizes = [
   {
     name: "13x18",
@@ -41,19 +40,14 @@ for (let i = 0; i < 10; i++) {
   };
   usersData.push(dataUser);
 }
-  
 
 Size.bulkCreate(sizes, { validate: true }).then((res) => {
-  console.log(res);
+  console.log("PrimerBulk", res);
 });
 
 User.bulkCreate(usersData, { validate: true }).then((res) => {
-  console.log(res);
+  console.log("SegundoBulk", res);
 });
-
-
-
-
 
 User.create({
   type: "admin",
@@ -65,11 +59,10 @@ User.create({
   console.log("user admin created");
 });
 
-
 User.create({
   type: "admin",
-  firstName: 'rafael',
-  lastName: 'romero',
+  firstName: "rafael",
+  lastName: "romero",
   email: "ra@ro.com",
   password: "1",
 }).then(() => {

@@ -1,26 +1,27 @@
-const Sequelize = require('sequelize');
-const sequelize = require('../db/index.js');
+const { Model, DataTypes } = require("sequelize");
+const sequelize = require("../db/index.js");
 
-class PuntoDeEncuentro extends Sequelize.Model { }
-PuntoDeEncuentro.init({
+class PuntoDeEncuentro extends Model {}
+PuntoDeEncuentro.init(
+  {
     address: {
-        type:Sequelize.STRING,
-        allowNull: false
+      type: DataTypes.STRING,
+      allowNull: false,
     },
-    place:{
-        type:Sequelize.STRING,
-        allowNull: false
+    place: {
+      type: DataTypes.STRING,
+      allowNull: false,
     },
-    neighborhood:{
-        type:Sequelize.STRING,
-        allowNull: false
+    neighborhood: {
+      type: DataTypes.STRING,
+      allowNull: false,
     },
-    Attention:{
-        type:Sequelize.STRING,
-        allowNull: false
-    }
-}, { sequelize, modelName: 'puntoDeEncuentro' });
+    Attention: {
+      type: DataTypes.STRING,
+      allowNull: false,
+    },
+  },
+  { sequelize, modelName: "puntoDeEncuentro" }
+);
 
 module.exports = PuntoDeEncuentro;
-
-

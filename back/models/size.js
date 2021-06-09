@@ -1,20 +1,20 @@
-const Sequelize = require("sequelize");
+const { Model, DataTypes } = require("sequelize");
 const sequelize = require("../db/index.js");
 
-class Size extends Sequelize.Model {}
+class Size extends Model {}
 Size.init(
   {
     name: {
-      type: Sequelize.STRING,
+      type: DataTypes.STRING,
       allowNull: false,
     },
     price: {
-      type: Sequelize.INTEGER,
+      type: DataTypes.INTEGER,
       allowNull: false,
       defaultValue: 0,
     },
     type: {
-      type: Sequelize.ENUM({
+      type: DataTypes.ENUM({
         values: ["digital", "impreso"],
       }),
       allowNull: false,
